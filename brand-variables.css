@@ -1,0 +1,193 @@
+/* SmallClaimsPro.online Brand CSS Variables */
+/* Copy this into your project's CSS */
+
+:root {
+  /* Primary Brand Colors */
+  --scp-emerald: #10B981;
+  --scp-emerald-light: #34D399;
+  --scp-emerald-pale: #ECFDF5;
+  --scp-emerald-deep: #059669;
+  --scp-emerald-dark: #064E3B;
+  
+  /* Accent Colors */
+  --scp-gold: #FCD34D;
+  --scp-amber: #F59E0B;
+  --scp-amber-deep: #D97706;
+  --scp-amber-pale: #FEF3C7;
+  
+  /* Neutral Colors */
+  --scp-charcoal: #1F2937;
+  --scp-gray-600: #4B5563;
+  --scp-gray-500: #6B7280;
+  --scp-gray-400: #9CA3AF;
+  --scp-gray-100: #F3F4F6;
+  --scp-white: #FFFFFF;
+  
+  /* Semantic Colors */
+  --scp-success: var(--scp-emerald);
+  --scp-warning: var(--scp-amber);
+  --scp-background: var(--scp-white);
+  --scp-background-alt: var(--scp-emerald-pale);
+  --scp-text-primary: var(--scp-charcoal);
+  --scp-text-secondary: var(--scp-gray-600);
+  --scp-text-muted: var(--scp-gray-500);
+  
+  /* Typography */
+  --scp-font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  --scp-font-size-xs: 12px;
+  --scp-font-size-sm: 14px;
+  --scp-font-size-base: 16px;
+  --scp-font-size-lg: 18px;
+  --scp-font-size-xl: 24px;
+  --scp-font-size-2xl: 32px;
+  --scp-font-size-3xl: 42px;
+  
+  /* Spacing */
+  --scp-spacing-xs: 4px;
+  --scp-spacing-sm: 8px;
+  --scp-spacing-md: 16px;
+  --scp-spacing-lg: 24px;
+  --scp-spacing-xl: 32px;
+  --scp-spacing-2xl: 48px;
+  
+  /* Border Radius */
+  --scp-radius-sm: 4px;
+  --scp-radius-md: 8px;
+  --scp-radius-lg: 12px;
+  --scp-radius-xl: 20px;
+  --scp-radius-full: 9999px;
+  
+  /* Shadows */
+  --scp-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --scp-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --scp-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --scp-background: #111827;
+    --scp-background-alt: var(--scp-emerald-dark);
+    --scp-text-primary: #F9FAFB;
+    --scp-text-secondary: #D1D5DB;
+    --scp-text-muted: #9CA3AF;
+    --scp-emerald: var(--scp-emerald-light);
+  }
+}
+
+/* ================================
+   UTILITY CLASSES
+   ================================ */
+
+/* Backgrounds */
+.scp-bg-primary { background-color: var(--scp-emerald); }
+.scp-bg-pale { background-color: var(--scp-emerald-pale); }
+.scp-bg-gold { background-color: var(--scp-gold); }
+.scp-bg-white { background-color: var(--scp-white); }
+
+/* Text Colors */
+.scp-text-primary { color: var(--scp-text-primary); }
+.scp-text-secondary { color: var(--scp-text-secondary); }
+.scp-text-muted { color: var(--scp-text-muted); }
+.scp-text-brand { color: var(--scp-emerald); }
+.scp-text-gold { color: var(--scp-gold); }
+
+/* Primary Button */
+.scp-btn-primary {
+  background-color: var(--scp-emerald);
+  color: var(--scp-white);
+  padding: var(--scp-spacing-sm) var(--scp-spacing-lg);
+  border-radius: var(--scp-radius-md);
+  font-weight: 600;
+  font-size: var(--scp-font-size-base);
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.scp-btn-primary:hover {
+  background-color: var(--scp-emerald-deep);
+}
+
+.scp-btn-primary:active {
+  transform: scale(0.98);
+}
+
+/* Secondary Button */
+.scp-btn-secondary {
+  background-color: transparent;
+  color: var(--scp-emerald);
+  padding: var(--scp-spacing-sm) var(--scp-spacing-lg);
+  border-radius: var(--scp-radius-md);
+  font-weight: 600;
+  font-size: var(--scp-font-size-base);
+  border: 2px solid var(--scp-emerald);
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.scp-btn-secondary:hover {
+  background-color: var(--scp-emerald);
+  color: var(--scp-white);
+}
+
+/* Card */
+.scp-card {
+  background: var(--scp-white);
+  border-radius: var(--scp-radius-lg);
+  padding: var(--scp-spacing-lg);
+  box-shadow: var(--scp-shadow-md);
+}
+
+/* Badge */
+.scp-badge-success {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--scp-spacing-xs);
+  background-color: var(--scp-emerald-pale);
+  color: var(--scp-emerald-deep);
+  padding: var(--scp-spacing-xs) var(--scp-spacing-sm);
+  border-radius: var(--scp-radius-full);
+  font-size: var(--scp-font-size-sm);
+  font-weight: 500;
+}
+
+/* Input */
+.scp-input {
+  width: 100%;
+  padding: var(--scp-spacing-sm) var(--scp-spacing-md);
+  border: 1px solid var(--scp-gray-400);
+  border-radius: var(--scp-radius-md);
+  font-size: var(--scp-font-size-base);
+  font-family: var(--scp-font-family);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.scp-input:focus {
+  outline: none;
+  border-color: var(--scp-emerald);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+/* ================================
+   BRAND WORDMARK STYLING
+   ================================ */
+
+.scp-wordmark {
+  font-family: var(--scp-font-family);
+  font-weight: 700;
+}
+
+.scp-wordmark-main {
+  color: var(--scp-charcoal);
+}
+
+.scp-wordmark-pro {
+  color: var(--scp-emerald);
+}
+
+/* Example usage:
+   <span class="scp-wordmark">
+     <span class="scp-wordmark-main">SmallClaims</span><span class="scp-wordmark-pro">Pro</span>
+   </span>
+*/

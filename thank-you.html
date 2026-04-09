@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thank You | SmallClaimsPro.online</title>
+    <meta
+      name="description"
+      content="Thanks for your submission. SmallClaimsPro has received your case details."
+    />
+    <!-- Replace G-ZYCPQEBGTN with your GA4 Measurement ID -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZYCPQEBGTN"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-ZYCPQEBGTN");
+    </script>
+    <link rel="canonical" href="https://smallclaimspro.online/thank-you.html" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="intake">
+      <div class="container">
+        <p>
+          <picture>
+            <source srcset="./logo-header.webp" type="image/webp" />
+            <img class="brand-logo" src="./logo-header.png" alt="SmallClaimsPro" />
+          </picture>
+        </p>
+        <h1>Thanks, you're all set.</h1>
+        <p class="subhead">
+          If you just completed checkout, this confirms you reached the post-payment page.
+          We will email your next steps shortly.
+        </p>
+
+        <section class="benefits">
+          <div class="grid">
+            <article>
+              <h2>Purchased: Complete Court Packet ($29)</h2>
+              <p>What happens next:</p>
+              <p>
+                You will receive your customized demand letter, Kern County filing steps, evidence
+                checklist, court script, and process server contacts by email.
+              </p>
+              <p>If you do not see it within 15 minutes, check spam/promotions and then contact support.</p>
+            </article>
+            <article>
+              <h2>Purchased: Done-For-You Document Prep ($99)</h2>
+              <p>What happens next:</p>
+              <p>
+                We begin document prep using your intake details, format required forms, and send a
+                ready-to-file packet for your review, signature, and filing.
+              </p>
+              <p>You may receive a quick follow-up email if any details are missing.</p>
+            </article>
+          </div>
+        </section>
+
+        <p class="note">
+          Information and document preparation support only. Not legal advice.
+        </p>
+
+        <section class="referral-block" aria-labelledby="referral-title">
+          <h2 id="referral-title">Know someone who is owed money?</h2>
+          <p class="referral-lead">
+            Share SmallClaimsPro — small claims help with demand letters, filing steps, and optional done-for-you prep.
+          </p>
+          <div class="referral-actions">
+            <button id="referralShareBtn" type="button" class="btn btn-primary">
+              Share link
+            </button>
+            <button id="referralCopyBtn" type="button" class="btn btn-secondary">
+              Copy link
+            </button>
+          </div>
+          <p id="referralCopyStatus" class="referral-status" role="status" aria-live="polite"></p>
+          <p class="referral-fine">
+            Referral perks (e.g. bonus review) can be offered by email — ask us after your first purchase.
+          </p>
+        </section>
+
+        <div class="cta-row">
+          <a class="btn btn-primary" href="./index.html">Back to Homepage</a>
+        </div>
+      </div>
+    </main>
+    <script src="./thank-you.js"></script>
+  </body>
+</html>
