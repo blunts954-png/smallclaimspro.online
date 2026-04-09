@@ -17,22 +17,12 @@ const heroPrimaryCta = document.getElementById("heroPrimaryCta");
 const heroSecondaryCta = document.getElementById("heroSecondaryCta");
 const mobileStickyCta = document.getElementById("mobileStickyCta");
 const yearEl = document.getElementById("year");
-const splashIntro = document.getElementById("splashIntro");
-const splashEnterBtn = document.getElementById("splashEnterBtn");
-const splashHeadline = document.getElementById("splashHeadline");
 const SUBMIT_THROTTLE_MS = 60 * 1000;
 const SUBMIT_STORAGE_KEY = "scp:last-submit-at";
 const MIN_FORM_AGE_MS = 4000;
 const TRACKING_SESSION_KEY = "scp:tracking-session-id";
-const SPLASH_VARIANT_KEY = "scp:splash-variant";
-const SPLASH_TAGLINES = [
-  "Let's get your money back.",
-  "Small claims made easy.",
-  "Your path to getting paid starts now.",
-];
 let isSubmitting = false;
 let formStartedTracked = false;
-let splashOpened = false;
 
 if (paidCta29 && CONFIG.squarePaymentLink29.startsWith("http")) {
   paidCta29.href = CONFIG.squarePaymentLink29;
@@ -100,7 +90,6 @@ if (form) {
 }
 
 trackEvent("landing_page_view");
-initSplashIntro();
 initCaseQuiz();
 
 async function handleSubmit(event) {
@@ -125,6 +114,7 @@ async function handleSubmit(event) {
   }
 
   const formData = new FormData(form);
+  const fallbackFormData = new FormData(form);
   const honeypotValue = String(formData.get("company_website") || "").trim();
   if (honeypotValue) {
     statusEl.textContent = "Submission blocked.";
@@ -146,6 +136,7 @@ async function handleSubmit(event) {
   payload.createdAt = new Date().toISOString();
   delete payload.company_website;
   delete payload.form_loaded_at;
+  delete payload["form-name"];
 
   if (!isValidEmail(payload.email)) {
     statusEl.textContent = "Please enter a valid email address.";
@@ -205,12 +196,47 @@ async function handleSubmit(event) {
       }
     }, 500);
   } catch (error) {
-    statusEl.textContent =
-      "Submission failed. Update Supabase config in app.js or try again in a minute.";
-    trackEvent("intake_submit_error");
     console.error(error);
+    const fallbackSubmitted = await submitNetlifyFallback(fallbackFormData);
+    if (fallbackSubmitted) {
+      localStorage.setItem(SUBMIT_STORAGE_KEY, String(nowMs));
+      trackEvent("intake_submit_success_fallback");
+      statusEl.textContent = "Request received. Redirecting...";
+      form.reset();
+      setTimeout(() => {
+        if (CONFIG.thankYouUrl) {
+          window.location.href = CONFIG.thankYouUrl;
+        }
+      }, 500);
+    } else {
+      statusEl.textContent =
+        "Submission failed. Please email support@smallclaimspro.online and we will help immediately.";
+      trackEvent("intake_submit_error");
+    }
   } finally {
     isSubmitting = false;
+  }
+}
+
+async function submitNetlifyFallback(formData) {
+  try {
+    const body = new URLSearchParams();
+    for (const [key, value] of formData.entries()) {
+      if (key === "company_website" && String(value).trim()) {
+        return false;
+      }
+      body.append(key, String(value));
+    }
+
+    const response = await fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: body.toString(),
+    });
+    return response.ok;
+  } catch (error) {
+    console.error("Netlify fallback failed.", error);
+    return false;
   }
 }
 
@@ -276,51 +302,6 @@ function trackEvent(eventName, props = {}) {
   }
 }
 
-function initSplashIntro() {
-  if (!splashIntro) {
-    return;
-  }
-
-  const variant = applySplashTaglineVariant();
-  trackEvent("splash_variant_viewed", { variant });
-
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const autoOpenDelay = reduceMotion ? 250 : 1800;
-  window.setTimeout(openSplash, autoOpenDelay);
-
-  if (splashEnterBtn) {
-    splashEnterBtn.addEventListener("click", openSplash);
-  }
-}
-
-function openSplash() {
-  if (!splashIntro || splashOpened) {
-    return;
-  }
-  splashOpened = true;
-  splashIntro.classList.add("is-open");
-  trackEvent("splash_intro_opened");
-}
-
-function applySplashTaglineVariant() {
-  let variant = sessionStorage.getItem(SPLASH_VARIANT_KEY);
-  if (!variant) {
-    variant = String(Math.floor(Math.random() * SPLASH_TAGLINES.length));
-    sessionStorage.setItem(SPLASH_VARIANT_KEY, variant);
-  }
-
-  const variantIndex = Number(variant);
-  const safeIndex =
-    Number.isInteger(variantIndex) && variantIndex >= 0 && variantIndex < SPLASH_TAGLINES.length
-      ? variantIndex
-      : 0;
-
-  if (splashHeadline) {
-    splashHeadline.textContent = SPLASH_TAGLINES[safeIndex];
-  }
-  return `v${safeIndex + 1}`;
-}
-
 function getTrackingSessionId() {
   let sessionId = sessionStorage.getItem(TRACKING_SESSION_KEY);
   if (!sessionId) {
@@ -362,22 +343,27 @@ function initCaseQuiz() {
       return;
     }
 
-    const raw =
-      Number(q1.value) + Number(q2.value) + Number(q3.value) + Number(q4.value);
+    const scores = {
+      amount: Number(q1.value),
+      proof: Number(q2.value),
+      paperTrail: Number(q3.value),
+      demand: Number(q4.value),
+    };
+    const weighted = scores.amount + scores.proof * 2 + scores.paperTrail * 2 + scores.demand * 2;
     let band = "needs_work";
-    if (raw >= 10) {
+    if (weighted >= 17) {
       band = "strong";
-    } else if (raw >= 7) {
+    } else if (weighted >= 12) {
       band = "moderate";
     }
 
     const copy = {
       strong:
-        "<p><strong>Snapshot: stronger position</strong></p><p>You likely have enough structure to move fast: tighten your demand, organize proof, and file if there is no response. Submit the free analysis below for a tailored plan.</p>",
+        "<p><strong>Snapshot: stronger position</strong></p><p>You have enough structure to move quickly. Tighten your demand letter, finalize your timeline, and prepare filing documents.</p><p><strong>Next:</strong> Submit the form for a tailored action plan and checklist.</p>",
       moderate:
-        "<p><strong>Snapshot: workable case</strong></p><p>There are gaps to close — usually proof, timeline, or a clear demand. The free analysis below helps you prioritize the next steps.</p>",
+        "<p><strong>Snapshot: workable with gaps</strong></p><p>Your case can improve fast if you close gaps in proof, timeline clarity, or written demands.</p><p><strong>Next:</strong> Submit the form and we will prioritize exactly what to fix first.</p>",
       needs_work:
-        "<p><strong>Snapshot: needs more groundwork</strong></p><p>Focus on documents, dates, and a written demand before filing. Use the form below — we will map what to gather first.</p>",
+        "<p><strong>Snapshot: needs groundwork first</strong></p><p>Right now, filing may be premature. Build evidence, lock your timeline, and send a proper written demand before court.</p><p><strong>Next:</strong> Submit the form for a step-by-step prep plan.</p>",
     };
 
     resultEl.hidden = false;
@@ -385,7 +371,7 @@ function initCaseQuiz() {
     resultEl.innerHTML = copy[band];
     trackEvent("case_quiz_completed", {
       case_score_band: band,
-      case_score_raw: String(raw),
+      case_score_raw: String(weighted),
     });
   });
 }

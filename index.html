@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bakersfield Small Claims Help | SmallClaimsPro</title>
+    <title>Bakersfield Small Claims Help | Action Plan, Court Packet, Done-For-You Prep</title>
     <meta
       name="description"
       content="Bakersfield small claims help with demand letters, filing steps, and done-for-you document prep. SmallClaimsPro helps you move forward fast."
@@ -15,6 +15,7 @@
       content="Demand letters, filing guidance, and done-for-you document prep for Bakersfield small claims."
     />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="SmallClaimsPro.online" />
     <meta property="og:url" content="https://smallclaimspro.online/" />
     <meta property="og:image" content="https://smallclaimspro.online/logo-header.png" />
     <meta name="twitter:card" content="summary_large_image" />
@@ -24,8 +25,15 @@
       content="Bakersfield-focused small claims guidance, templates, and done-for-you prep."
     />
     <meta name="twitter:image" content="https://smallclaimspro.online/logo-header.png" />
+    <meta name="theme-color" content="#0b1320" />
     <meta name="geo.region" content="US-CA" />
     <meta name="geo.placename" content="Bakersfield" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Merriweather:wght@700;900&display=swap"
+      rel="stylesheet"
+    />
     <!-- Replace G-ZYCPQEBGTN with your GA4 Measurement ID -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZYCPQEBGTN"></script>
     <script>
@@ -160,19 +168,6 @@
     </script>
   </head>
   <body>
-    <div id="splashIntro" class="splash-intro" role="dialog" aria-modal="true" aria-label="Welcome">
-      <div class="splash-door left"></div>
-      <div class="splash-door right"></div>
-      <div class="splash-center">
-        <img src="./logo-header.png" alt="SmallClaimsPro logo" class="splash-logo" />
-        <p class="splash-kicker">Welcome to SmallClaimsPro</p>
-        <p id="splashHeadline" class="splash-headline">Let's get your money back.</p>
-        <button id="splashEnterBtn" class="btn btn-primary splash-btn" type="button">
-          Enter Site
-        </button>
-      </div>
-    </div>
-
     <div class="bg-orb orb-1" aria-hidden="true"></div>
     <div class="bg-orb orb-2" aria-hidden="true"></div>
     <div class="bg-grid" aria-hidden="true"></div>
@@ -192,9 +187,23 @@
     <main>
       <section class="social-proof">
         <div class="container social-proof-row">
-          <p>"Clear steps and no legal jargon. Exactly what I needed."</p>
-          <p>"The checklist helped me get organized fast."</p>
-          <p>"I finally knew what to do first."</p>
+          <p>What people usually need first: a clear demand letter that gets a response.</p>
+          <p>What slows most cases down: weak timelines, missing receipts, and unclear proof.</p>
+          <p>What moves cases forward: organized evidence, clean filing steps, and firm follow-up.</p>
+        </div>
+      </section>
+
+      <section class="authority-strip" aria-label="Authority and local references">
+        <div class="container authority-row">
+          <span class="authority-badge">Proudly serving Bakersfield and Kern County</span>
+          <a
+            class="authority-link"
+            href="https://www.kern.courts.ca.gov/divisions/small-claims"
+            target="_blank"
+            rel="noopener"
+          >
+            Kern County Small Claims Court Resources
+          </a>
         </div>
       </section>
 
@@ -207,7 +216,7 @@
             Bakersfield small claims in minutes.
           </p>
           <div class="cta-row">
-            <a id="heroPrimaryCta" href="#intake" class="btn btn-primary">Start My Free Case Analysis</a>
+            <a id="heroPrimaryCta" href="#intake" class="btn btn-primary">Get My Free Action Plan</a>
             <a id="heroSecondaryCta" href="#how-it-works" class="btn btn-secondary">How It Works</a>
           </div>
           <p class="note">Information and document prep support only. Not legal advice.</p>
@@ -286,8 +295,49 @@
       <section id="intake" class="intake">
         <div class="container">
           <h2>Free Case Analysis</h2>
-          <p>Fill this out and get your first action plan by email.</p>
-          <form id="intakeForm" novalidate>
+          <p>
+            Fill this out and get your first action plan by email. You will also get the Bakersfield
+            Small Claims Checklist after submission.
+          </p>
+          <section class="pricing-compare" aria-labelledby="pricing-compare-title">
+            <h3 id="pricing-compare-title">Free vs Paid Options</h3>
+            <div class="pricing-grid">
+              <article>
+                <h4>Free Analysis</h4>
+                <ul>
+                  <li>Initial action plan by email</li>
+                  <li>Proof and timeline priorities</li>
+                  <li>Checklist to organize your case</li>
+                </ul>
+              </article>
+              <article>
+                <h4>Court Packet - $29</h4>
+                <ul>
+                  <li>Demand letter draft</li>
+                  <li>Kern County filing steps</li>
+                  <li>Evidence checklist and hearing script</li>
+                </ul>
+              </article>
+              <article>
+                <h4>Done-For-You Prep - $99</h4>
+                <ul>
+                  <li>Document preparation support</li>
+                  <li>Ready-to-file packet review flow</li>
+                  <li>Follow-up for missing details</li>
+                </ul>
+              </article>
+            </div>
+          </section>
+          <form
+            id="intakeForm"
+            name="intake-form"
+            method="POST"
+            action="/thank-you.html"
+            data-netlify="true"
+            netlify-honeypot="company_website"
+            novalidate
+          >
+            <input type="hidden" name="form-name" value="intake-form" />
             <div class="hp-field" aria-hidden="true">
               <label for="company_website">
                 Company website
@@ -329,18 +379,33 @@
             <button class="btn btn-primary" type="submit">Get My Free Analysis</button>
             <p id="formStatus" class="status" aria-live="polite"></p>
           </form>
-          <div class="paid-cta-group">
-            <a id="paidCta29" class="btn btn-paid" href="#" rel="noopener" target="_blank">
-              Get My Court Packet - $29
-            </a>
-            <a id="paidCta99" class="btn btn-paid btn-paid-secondary" href="#" rel="noopener" target="_blank">
-              Done-For-You Document Prep - $99
-            </a>
+          <div class="paid-upsell" aria-label="Optional paid add-ons">
+            <p class="paid-upsell-title">Optional paid add-ons (after your free analysis)</p>
+            <div class="paid-cta-group">
+              <a
+                id="paidCta29"
+                class="btn btn-paid"
+                href="https://square.link/u/Y6Wb0XPx"
+                rel="noopener"
+                target="_blank"
+              >
+                Get My Court Packet - $29
+              </a>
+              <a
+                id="paidCta99"
+                class="btn btn-paid btn-paid-secondary"
+                href="https://square.link/u/vSbyYSIn"
+                rel="noopener"
+                target="_blank"
+              >
+                Done-For-You Document Prep - $99
+              </a>
+            </div>
+            <p class="upsell-note">
+              Most customers start with the $29 packet in under 10 minutes, then upgrade to $99 if
+              they want done-for-you form preparation.
+            </p>
           </div>
-          <p class="upsell-note">
-            Most customers start with the $29 packet in under 10 minutes, then upgrade to $99 if
-            they want done-for-you form preparation.
-          </p>
           <div class="trust-points">
             <span>Bakersfield-focused filing guidance</span>
             <span>Plain-English, step-by-step instructions</span>
@@ -420,8 +485,15 @@
 
     <footer class="site-footer">
       <div class="container row-between">
-        <p>Helping Bakersfield residents move cases forward.</p>
-        <p>&copy; <span id="year"></span> SmallClaimsPro.online</p>
+        <div class="footer-meta">
+          <p>Helping Bakersfield residents move cases forward.</p>
+          <p>&copy; <span id="year"></span> SmallClaimsPro.online</p>
+        </div>
+        <nav class="footer-links" aria-label="Footer">
+          <a href="./privacy.html">Privacy</a>
+          <a href="./terms.html">Terms</a>
+          <a href="./contact.html">Contact</a>
+        </nav>
       </div>
     </footer>
 
