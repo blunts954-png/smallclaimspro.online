@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Small Claims Guide — Bakersfield & Kern County | SmallClaimsPro</title>
+<meta name="description" content="Free guides on filing small claims court in Bakersfield CA. Demand letters, Kern County filing steps, evidence tips, and more."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--navy:#0f1f3d;--navy3:#1e3460;--gold:#c9a84c;--gold2:#e8c76a;--gold-dim:rgba(201,168,76,0.12);--gold-line:rgba(201,168,76,0.25);--cream:#faf8f3;--cream2:#f3efe6;--white:#fff;--text:#1a1a2e;--muted:#6b7280;--border:rgba(15,31,61,0.1);--green:#16a34a;--serif:'Playfair Display',Georgia,serif;--sans:'DM Sans',sans-serif;--mono:'DM Mono',monospace;--shadow:0 1px 3px rgba(15,31,61,0.08),0 4px 16px rgba(15,31,61,0.06);}
+*{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}
+body{background:var(--cream);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.6;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
+nav{position:sticky;top:0;z-index:100;background:rgba(15,31,61,0.97);backdrop-filter:blur(12px);padding:0 2rem;height:64px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(201,168,76,0.2);}
+.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-logo-mark{width:32px;height:32px;background:var(--gold);border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:16px;font-weight:700;color:var(--navy);}
+.nav-brand-text{font-family:var(--serif);font-size:17px;font-weight:700;color:white;}
+.nav-brand-text span{color:var(--gold);}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{color:rgba(255,255,255,0.65);font-size:14px;text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover,.nav-links a.active{color:white;}
+.nav-cta{background:var(--gold);color:var(--navy);padding:9px 20px;border-radius:6px;font-size:13px;font-weight:600;text-decoration:none;}
+
+.page-hero{background:var(--navy);padding:5rem 2rem 4rem;text-align:center;position:relative;overflow:hidden;}
+.page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 50% 100%,rgba(201,168,76,0.06) 0%,transparent 70%);pointer-events:none;}
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;color:var(--gold);text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;justify-content:center;gap:8px;}
+.eyebrow::before,.eyebrow::after{content:'';width:20px;height:1px;background:var(--gold);}
+h1{font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);font-weight:800;color:white;margin-bottom:1rem;letter-spacing:-0.02em;}
+.page-sub{font-size:15px;color:rgba(255,255,255,0.6);max-width:480px;margin:0 auto;line-height:1.7;}
+
+.blog-layout{max-width:1040px;margin:0 auto;padding:4rem 2rem;display:grid;grid-template-columns:1fr 300px;gap:3rem;align-items:start;}
+
+/* POSTS */
+.posts-grid{display:flex;flex-direction:column;gap:2rem;}
+.post-card{background:white;border-radius:14px;overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow);transition:transform 0.2s,box-shadow 0.2s;}
+.post-card:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(15,31,61,0.12);}
+.post-card-body{padding:2rem;}
+.post-cat{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:0.75rem;display:inline-block;padding:3px 10px;border-radius:20px;}
+.cat-contractor{background:rgba(201,168,76,0.12);color:#92600a;}
+.cat-landlord{background:rgba(15,31,61,0.08);color:var(--navy);}
+.cat-debt{background:rgba(22,163,74,0.08);color:#15803d;}
+.cat-filing{background:rgba(220,38,38,0.08);color:#b91c1c;}
+.cat-guide{background:rgba(15,31,61,0.06);color:var(--navy);}
+.post-title{font-family:var(--serif);font-size:1.3rem;font-weight:700;color:var(--navy);margin-bottom:0.75rem;line-height:1.3;text-decoration:none;display:block;}
+.post-title:hover{color:var(--gold);}
+.post-excerpt{font-size:14px;color:var(--muted);line-height:1.75;margin-bottom:1.25rem;}
+.post-meta{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted);}
+.post-read{font-weight:600;color:var(--navy);text-decoration:none;display:flex;align-items:center;gap:4px;}
+.post-read:hover{color:var(--gold);}
+
+/* FEATURED POST */
+.post-card.featured{border-color:var(--gold);border-width:2px;}
+.post-card.featured .post-card-body{border-left:4px solid var(--gold);}
+
+/* SIDEBAR */
+.sidebar{position:sticky;top:80px;display:flex;flex-direction:column;gap:1.5rem;}
+.sidebar-widget{background:white;border:1px solid var(--border);border-radius:14px;padding:1.5rem;}
+.widget-title{font-family:var(--serif);font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:1rem;padding-bottom:0.75rem;border-bottom:1px solid var(--border);}
+.cta-widget{background:var(--navy);border-color:transparent;}
+.cta-widget .widget-title{color:white;border-color:rgba(255,255,255,0.1);}
+.cta-desc{font-size:13px;color:rgba(255,255,255,0.6);line-height:1.65;margin-bottom:1.25rem;}
+.cta-btn{display:block;text-align:center;background:var(--gold);color:var(--navy);padding:11px;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none;transition:background 0.2s;}
+.cta-btn:hover{background:var(--gold2);}
+.quick-links{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.quick-links a{font-size:13px;color:var(--navy);text-decoration:none;display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);}
+.quick-links a:last-child{border-bottom:none;}
+.quick-links a:hover{color:var(--gold);}
+.quick-links a::after{content:'→';color:var(--muted);font-size:11px;}
+.resource-list{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.resource-list a{font-size:12px;color:var(--navy);text-decoration:none;display:flex;align-items:flex-start;gap:8px;line-height:1.5;}
+.resource-list a::before{content:'⬡';color:var(--gold);flex-shrink:0;font-size:11px;}
+.resource-list a:hover{color:var(--gold);}
+
+/* ARTICLE PAGE (reused) */
+.article-wrap{max-width:720px;margin:0 auto;padding:4rem 2rem;}
+.article-header{margin-bottom:2.5rem;}
+.article-body h2{font-family:var(--serif);font-size:1.4rem;font-weight:700;color:var(--navy);margin:2rem 0 0.75rem;}
+.article-body h3{font-family:var(--serif);font-size:1.1rem;font-weight:700;color:var(--navy);margin:1.5rem 0 0.5rem;}
+.article-body p{font-size:15px;color:var(--text);line-height:1.8;margin-bottom:1rem;}
+.article-body ul,.article-body ol{padding-left:1.5rem;margin-bottom:1rem;}
+.article-body li{font-size:15px;color:var(--text);line-height:1.75;margin-bottom:6px;}
+.article-body a{color:var(--navy);text-decoration:underline;}
+.article-cta-box{background:var(--navy);border-radius:12px;padding:2rem;margin:2.5rem 0;text-align:center;}
+.article-cta-box h3{font-family:var(--serif);font-size:1.2rem;color:white;margin-bottom:0.5rem;}
+.article-cta-box p{font-size:13px;color:rgba(255,255,255,0.6);margin-bottom:1.25rem;}
+.article-cta-box a{display:inline-block;background:var(--gold);color:var(--navy);padding:11px 24px;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none;}
+.article-cta-box a:hover{background:var(--gold2);}
+
+footer{background:#08142a;padding:2.5rem 2rem;text-align:center;border-top:1px solid rgba(201,168,76,0.15);}
+.footer-brand{font-family:var(--serif);font-size:1.1rem;font-weight:700;color:white;margin-bottom:0.75rem;}
+.footer-brand span{color:var(--gold);}
+.footer-links{display:flex;justify-content:center;flex-wrap:wrap;gap:1.5rem;margin-bottom:1.25rem;}
+.footer-links a{font-size:13px;color:rgba(255,255,255,0.4);text-decoration:none;}
+.footer-links a:hover{color:var(--gold);}
+footer p{font-size:11px;color:rgba(255,255,255,0.25);}
+@media(max-width:768px){nav .nav-links{display:none;}.blog-layout{grid-template-columns:1fr;}.sidebar{position:static;}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="nav-brand"><div class="nav-logo-mark">S</div><span class="nav-brand-text">Small<span>Claims</span>Pro</span></a>
+  <ul class="nav-links">
+    <li><a href="/#how-it-works">How It Works</a></li>
+    <li><a href="/#pricing">Pricing</a></li>
+    <li><a href="/blog" class="active">Guides</a></li>
+    <li><a href="/faq">FAQ</a></li>
+  </ul>
+  <a href="/#intake" class="nav-cta">Start Free →</a>
+</nav>
+
+<div class="page-hero">
+  <div class="eyebrow">Free Resources</div>
+  <h1>Bakersfield Small Claims Guides</h1>
+  <p class="page-sub">Plain-English guides on filing, demand letters, evidence, and winning your case in Kern County court. No lawyer required.</p>
+</div>
+
+<div class="blog-layout">
+  <div class="posts-grid">
+
+    <!-- FEATURED -->
+    <div class="post-card featured">
+      <div class="post-card-body">
+        <span class="post-cat cat-guide">Complete Guide</span>
+        <a href="/blog/how-to-file-small-claims-bakersfield" class="post-title">How to File Small Claims Court in Bakersfield CA — Complete 2026 Guide</a>
+        <p class="post-excerpt">Everything you need to know about filing in Kern County — the SC-100 form, courthouse address, filing fees, service requirements, and what happens on hearing day. Written specifically for Bakersfield residents.</p>
+        <div class="post-meta"><span>8 min read · Bakersfield, CA</span><a href="/blog/how-to-file-small-claims-bakersfield" class="post-read">Read guide →</a></div>
+      </div>
+    </div>
+
+    <div class="post-card">
+      <div class="post-card-body">
+        <span class="post-cat cat-contractor">Contractor Disputes</span>
+        <a href="/blog/contractor-took-my-money-bakersfield" class="post-title">Contractor Took My Money and Disappeared — What To Do in California</a>
+        <p class="post-excerpt">A contractor took your deposit and stopped showing up. Here's the exact legal playbook — demand letter, filing steps, and how to document your case to maximize your chances of recovering your money.</p>
+        <div class="post-meta"><span>6 min read</span><a href="/blog/contractor-took-my-money-bakersfield" class="post-read">Read guide →</a></div>
+      </div>
+    </div>
+
+    <div class="post-card">
+      <div class="post-card-body">
+        <span class="post-cat cat-landlord">Landlord Disputes</span>
+        <a href="/blog/security-deposit-kern-county" class="post-title">Landlord Kept Your Security Deposit? California Law Is On Your Side.</a>
+        <p class="post-excerpt">California Civil Code 1950.5 gives landlords 21 days to return your deposit with written itemization. Miss that deadline and you may be owed double. Here's exactly how to fight back in Kern County.</p>
+        <div class="post-meta"><span>5 min read</span><a href="/blog/security-deposit-kern-county" class="post-read">Read guide →</a></div>
+      </div>
+    </div>
+
+    <div class="post-card">
+      <div class="post-card-body">
+        <span class="post-cat cat-debt">Unpaid Debt</span>
+        <a href="/blog/someone-owes-me-money-california" class="post-title">Someone Owes You Money in California — Is Small Claims Worth It?</a>
+        <p class="post-excerpt">The math, the process, and the realistic outcomes. When small claims makes sense, when it doesn't, and how to calculate whether your claim is worth the time and filing fee.</p>
+        <div class="post-meta"><span>4 min read</span><a href="/blog/someone-owes-me-money-california" class="post-read">Read guide →</a></div>
+      </div>
+    </div>
+
+    <div class="post-card">
+      <div class="post-card-body">
+        <span class="post-cat cat-filing">How to File</span>
+        <a href="/blog/demand-letter-california" class="post-title">How to Write a Demand Letter That Actually Gets a Response</a>
+        <p class="post-excerpt">The demand letter is often the most important document in your case — and most people write them wrong. The right tone, the right legal language, and the right delivery method for California.</p>
+        <div class="post-meta"><span>5 min read</span><a href="/blog/demand-letter-california" class="post-read">Read guide →</a></div>
+      </div>
+    </div>
+
+    <div class="post-card">
+      <div class="post-card-body">
+        <span class="post-cat cat-guide">Hearing Prep</span>
+        <a href="/blog/small-claims-hearing-what-to-expect" class="post-title">What to Expect at Your Small Claims Hearing in Kern County</a>
+        <p class="post-excerpt">What happens when you walk into the courtroom, how long it takes, what the judge actually wants to see, and the most common mistakes people make that cost them cases they should have won.</p>
+        <div class="post-meta"><span>7 min read</span><a href="/blog/small-claims-hearing-what-to-expect" class="post-read">Read guide →</a></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="sidebar-widget cta-widget">
+      <div class="widget-title">Ready to fight back?</div>
+      <p class="cta-desc">Get your demand letter drafted and Kern County filing steps in minutes. Free to start.</p>
+      <a href="/#intake" class="cta-btn">Get Free Action Plan →</a>
+    </div>
+
+    <div class="sidebar-widget">
+      <div class="widget-title">Quick Links</div>
+      <ul class="quick-links">
+        <li><a href="/#pricing">Court Packet — $29</a></li>
+        <li><a href="/#pricing">Done-For-You — $99</a></li>
+        <li><a href="/faq">FAQ</a></li>
+        <li><a href="/contact">Contact Jason</a></li>
+      </ul>
+    </div>
+
+    <div class="sidebar-widget">
+      <div class="widget-title">Official Resources</div>
+      <ul class="resource-list">
+        <li><a href="https://www.kern.courts.ca.gov/divisions/small-claims" target="_blank">Kern County Small Claims Court</a></li>
+        <li><a href="https://www.courts.ca.gov/selfhelp-smallclaims.htm" target="_blank">California Courts Self-Help</a></li>
+        <li><a href="https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?sectionNum=1950.5.&lawCode=CIV" target="_blank">CA Civil Code 1950.5 (Deposits)</a></li>
+        <li><a href="https://www.kern.courts.ca.gov/divisions/small-claims" target="_blank">SC-100 Form (Plaintiff's Claim)</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-brand">Small<span>Claims</span>Pro</div>
+  <div class="footer-links"><a href="/">Home</a><a href="/blog">Guides</a><a href="/faq">FAQ</a><a href="/contact">Contact</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div>
+  <p>SmallClaimsPro · Bakersfield & Kern County · Information and document prep support only. Not legal advice. © 2026</p>
+</footer>
+</body>
+</html>

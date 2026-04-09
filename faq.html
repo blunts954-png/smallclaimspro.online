@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>FAQ | SmallClaimsPro — Bakersfield Small Claims Help</title>
+<meta name="description" content="Answers to the most common questions about small claims court in Bakersfield and Kern County California."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--navy:#0f1f3d;--navy3:#1e3460;--gold:#c9a84c;--gold2:#e8c76a;--gold-dim:rgba(201,168,76,0.12);--gold-line:rgba(201,168,76,0.25);--cream:#faf8f3;--cream2:#f3efe6;--white:#fff;--text:#1a1a2e;--muted:#6b7280;--border:rgba(15,31,61,0.1);--green:#16a34a;--green-dim:rgba(22,163,74,0.08);--serif:'Playfair Display',Georgia,serif;--sans:'DM Sans',sans-serif;--mono:'DM Mono',monospace;--shadow:0 1px 3px rgba(15,31,61,0.08),0 4px 16px rgba(15,31,61,0.06);}
+*{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}
+body{background:var(--cream);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.6;}
+nav{position:sticky;top:0;z-index:100;background:rgba(15,31,61,0.97);backdrop-filter:blur(12px);padding:0 2rem;height:64px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(201,168,76,0.2);}
+.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-logo-mark{width:32px;height:32px;background:var(--gold);border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:16px;font-weight:700;color:var(--navy);}
+.nav-brand-text{font-family:var(--serif);font-size:17px;font-weight:700;color:white;}
+.nav-brand-text span{color:var(--gold);}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{color:rgba(255,255,255,0.65);font-size:14px;text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover,.nav-links a.active{color:white;}
+.nav-cta{background:var(--gold);color:var(--navy);padding:9px 20px;border-radius:6px;font-size:13px;font-weight:600;text-decoration:none;}
+
+.page-hero{background:var(--navy);padding:5rem 2rem 4rem;text-align:center;position:relative;overflow:hidden;}
+.page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 50% 100%,rgba(201,168,76,0.06) 0%,transparent 70%);pointer-events:none;}
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;color:var(--gold);text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;justify-content:center;gap:8px;}
+.eyebrow::before,.eyebrow::after{content:'';width:20px;height:1px;background:var(--gold);}
+h1{font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);font-weight:800;color:white;margin-bottom:1rem;letter-spacing:-0.02em;}
+.page-sub{font-size:15px;color:rgba(255,255,255,0.6);max-width:480px;margin:0 auto;line-height:1.7;}
+
+.faq-layout{max-width:840px;margin:0 auto;padding:4rem 2rem;}
+
+/* CATEGORY TABS */
+.faq-cats{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:2.5rem;}
+.faq-cat{background:white;border:1px solid var(--border);color:var(--muted);font-size:12px;font-weight:600;padding:7px 16px;border-radius:20px;cursor:pointer;transition:all 0.15s;text-transform:uppercase;letter-spacing:0.06em;}
+.faq-cat:hover{border-color:var(--navy);color:var(--navy);}
+.faq-cat.active{background:var(--navy);color:white;border-color:var(--navy);}
+
+/* FAQ GROUPS */
+.faq-group{margin-bottom:2.5rem;}
+.faq-group-title{font-family:var(--serif);font-size:1.2rem;font-weight:700;color:var(--navy);margin-bottom:1.25rem;padding-bottom:0.75rem;border-bottom:2px solid var(--gold);display:inline-block;}
+.faq-item{border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:10px;background:white;transition:box-shadow 0.2s;}
+.faq-item:hover{box-shadow:var(--shadow);}
+.faq-q{width:100%;text-align:left;background:none;border:none;padding:1.25rem 1.5rem;font-family:var(--sans);font-size:15px;font-weight:600;color:var(--navy);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem;}
+.faq-toggle{width:24px;height:24px;border-radius:50%;background:var(--gold-dim);border:1px solid var(--gold-line);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:14px;flex-shrink:0;transition:all 0.25s;}
+.faq-item.open .faq-toggle{background:var(--gold);color:var(--navy);transform:rotate(45deg);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height 0.35s ease;}
+.faq-item.open .faq-a{max-height:600px;}
+.faq-a-inner{padding:0 1.5rem 1.5rem;font-size:14px;color:var(--muted);line-height:1.8;border-top:1px solid var(--border);}
+.faq-a-inner p{margin-bottom:0.75rem;}
+.faq-a-inner p:last-child{margin-bottom:0;}
+.faq-a-inner a{color:var(--navy);font-weight:500;}
+.faq-a-inner strong{color:var(--text);}
+.faq-a-inner ul{padding-left:1.25rem;margin-top:0.5rem;}
+.faq-a-inner li{margin-bottom:5px;}
+
+/* CTA STRIP */
+.cta-strip{background:var(--navy);border-radius:16px;padding:2.5rem;text-align:center;margin:3rem 0;}
+.cta-strip h2{font-family:var(--serif);font-size:1.6rem;font-weight:700;color:white;margin-bottom:0.75rem;}
+.cta-strip p{font-size:14px;color:rgba(255,255,255,0.6);margin-bottom:1.5rem;max-width:440px;margin-left:auto;margin-right:auto;}
+.cta-strip-btns{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;}
+.btn-gold{background:var(--gold);color:var(--navy);padding:13px 24px;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none;transition:background 0.2s;}
+.btn-gold:hover{background:var(--gold2);}
+.btn-outline-white{background:transparent;color:white;padding:13px 24px;border-radius:8px;font-size:14px;border:1px solid rgba(255,255,255,0.25);text-decoration:none;transition:all 0.2s;}
+.btn-outline-white:hover{background:rgba(255,255,255,0.1);}
+
+footer{background:#08142a;padding:2.5rem 2rem;text-align:center;border-top:1px solid rgba(201,168,76,0.15);}
+.footer-brand{font-family:var(--serif);font-size:1.1rem;font-weight:700;color:white;margin-bottom:0.75rem;}
+.footer-brand span{color:var(--gold);}
+.footer-links{display:flex;justify-content:center;flex-wrap:wrap;gap:1.5rem;margin-bottom:1.25rem;}
+.footer-links a{font-size:13px;color:rgba(255,255,255,0.4);text-decoration:none;}
+.footer-links a:hover{color:var(--gold);}
+footer p{font-size:11px;color:rgba(255,255,255,0.25);}
+@media(max-width:768px){nav .nav-links{display:none;}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="nav-brand"><div class="nav-logo-mark">S</div><span class="nav-brand-text">Small<span>Claims</span>Pro</span></a>
+  <ul class="nav-links">
+    <li><a href="/#how-it-works">How It Works</a></li>
+    <li><a href="/#pricing">Pricing</a></li>
+    <li><a href="/blog">Guides</a></li>
+    <li><a href="/faq" class="active">FAQ</a></li>
+  </ul>
+  <a href="/#intake" class="nav-cta">Start Free →</a>
+</nav>
+
+<div class="page-hero">
+  <div class="eyebrow">Frequently Asked</div>
+  <h1>Every question answered.</h1>
+  <p class="page-sub">Straight answers about small claims court in Bakersfield and how SmallClaimsPro works. No jargon.</p>
+</div>
+
+<div class="faq-layout">
+  <div class="faq-cats">
+    <button class="faq-cat active" onclick="filterFaq('all',this)">All Questions</button>
+    <button class="faq-cat" onclick="filterFaq('process',this)">The Process</button>
+    <button class="faq-cat" onclick="filterFaq('legal',this)">California Law</button>
+    <button class="faq-cat" onclick="filterFaq('product',this)">About SmallClaimsPro</button>
+    <button class="faq-cat" onclick="filterFaq('pricing',this)">Pricing</button>
+  </div>
+
+  <!-- ABOUT THE PRODUCT -->
+  <div class="faq-group" data-cat="product">
+    <div class="faq-group-title">About SmallClaimsPro</div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Is this legal advice? <span class="faq-toggle">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner"><p><strong>No — and we're upfront about that.</strong> SmallClaimsPro provides educational information, document templates, and document preparation support only. We are not a law firm and do not provide legal advice or representation.</p><p>For most California small claims cases this doesn't matter — lawyers cannot represent parties at the hearing anyway. But if you need representation or have a complex legal situation, consult a licensed California attorney.</p></div></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">How fast will I get my action plan after submitting? <span class="faq-toggle">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner"><p>Free analysis submissions receive a personal reply within <strong>2 business hours</strong> during business hours (9AM–6PM Mon–Fri). Jason reviews every submission personally — you're not getting a template, you're getting an actual read of your specific situation.</p><p>Paid court packets ($29) arrive within the same timeframe with your demand letter already drafted based on your case details.</p></div></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">What's the difference between the free analysis and the $29 court packet? <span class="faq-toggle">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner"><p>The <strong>free analysis</strong> tells you what your case looks like, what evidence to gather, and what your realistic odds are. It's a roadmap.</p><p>The <strong>$29 court packet</strong> hands you the actual tools — your demand letter already drafted in California legal language, the Kern County SC-100 filing steps, an evidence checklist specific to your case type, and a hearing script so you don't freeze up in front of the judge.</p><p>Most people who are serious about filing upgrade to the $29 packet because the demand letter alone is worth more than $29 if it gets the other party to pay before you even file.</p></div></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Who built this and who reviews my submission? <span class="faq-toggle">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner"><p>SmallClaimsPro was built by Jason Manuel, founder of <a href="https://chaoticallyorganizedai.com" target="_blank">Chaotically Organized AI</a> and a Bakersfield local. Jason reviews every submission personally before sending your action plan. You're dealing with a real person from Bakersfield, not a chatbot generating generic templates.</p></div></div>
+    </div>
+  </div>
+
+  <!-- PRICING -->
+  <div class="faq-group" data-cat="pricing">
+    <div class="faq-group-title">Pricing</div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">What does the $99 done-for-you prep include exactly? <span class="faq-toggle">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner"><p>The $99 option is for people who want hands-on document preparation support. It includes everything in the $29 court packet plus:</p><ul><li>Direct review of your specific documents and evidence</li><li>Ready-to-file packet organization</li><li>Follow-up communication if information is missing or unclear</li><li>A personalized hearing prep session based on your specific case</li></ul><p>Choose this if your case is complex, the amount is significant, or you want the highest level of preparation support.</p></div></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Are there refunds? <span class="faq-toggle">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner"><p>If you paid for a court packet or done-for-you prep and are not satisfied with what you received, contact us at <a href="mailto:support@smallclaimspro.online">support@smallclaimspro.online</a> within 7 days of purchase. We will either fix the issue or issue a refund — we stand behind what we deliver.</p></div></div>
+    </div>
+  </div>
+
+  <!-- CALIFORNIA LAW -->
+  <div class="faq-group" data-cat="legal">
+    <div class="faq-group-title">California Small Claims Law</div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">How much can I claim in California small claims court? <span class="faq-toggle">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner"><p>As of 2026, the limits are:</p><ul><li><strong>Individuals:</strong> up to $12,500 per claim</li><li><strong>Businesses, corporations, or public entities:</strong> up to $6,250</li><li>You may file up to 2 claims per calendar year that exceed $2,500</li></ul><p>Verify current limits at <a href="https://www.kern.courts.ca.gov/divisions/small-claims" target="_blank">kern.courts.ca.gov</a> as these can change.</p></div></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Do I need a lawyer for small claims court in California? <span class="faq-toggle">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner"><p><strong>No — and in most cases, lawyers cannot represent you at the hearing anyway.</strong> California Code of Civil Procedure Section 116.530 generally prohibits attorneys from representing parties at small claims hearings. Both sides argue their own cases directly to the judge.</p><p>This is actually a feature, not a bug — it levels the playing field and keeps costs low for everyone.</p></div></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">What is the statute of limitations for small claims in California? <span class="faq-toggle">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner"><p>The time limit to file depends on your case type:</p><ul><li><strong>Written contracts:</strong> 4 years from the breach</li><li><strong>Oral contracts:</strong> 2 years from the breach</li><li><strong>Property damage:</strong> 3 years</li><li><strong>Personal injury:</strong> 2 years</li></ul><p>If you're close to the deadline, file sooner rather than later. Missing the statute of limitations means you lose your right to sue regardless of how strong your case is.</p></div></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Can I sue someone who lives in a different county? <span class="faq-toggle">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner"><p>Yes, but you typically need to file in the county where the defendant lives, works, or where the transaction occurred. If a Kern County contractor did work on your property in Bakersfield but lives in LA County, you can generally file in Kern County since that's where the work happened.</p></div></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">What if I win but the other person doesn't pay? <span class="faq-toggle">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner"><p>A judgment in your favor is a legally enforceable court order. If the defendant doesn't pay voluntarily, you have enforcement tools including:</p><ul><li><strong>Wage garnishment</strong> — up to 25% of their disposable earnings</li><li><strong>Bank account levy</strong> — freeze and collect from their accounts</li><li><strong>Property lien</strong> — clouds their title if they own real estate</li><li><strong>Vehicle levy</strong> — seize and sell a registered vehicle</li></ul><p>California judgments are valid for 10 years and renewable. The judgment also shows on their credit report, which motivates most people to pay.</p></div></div>
+    </div>
+  </div>
+
+  <!-- THE PROCESS -->
+  <div class="faq-group" data-cat="process">
+    <div class="faq-group-title">The Filing Process</div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Where do I file small claims in Bakersfield? <span class="faq-toggle">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner"><p><strong>Kern County Superior Court</strong><br>1415 Truxtun Avenue, Bakersfield, CA 93301<br>Small Claims window: First floor<br>Hours: Monday–Friday, 8:00 AM – 4:00 PM<br>Phone: (661) 868-5000</p></div></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">How long does the small claims process take? <span class="faq-toggle">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner"><p>From filing to hearing is typically <strong>30–70 days</strong> in Kern County, depending on the court's calendar. After the hearing, if you win and the defendant still doesn't pay, enforcement can take additional weeks or months depending on their assets and cooperation.</p><p>Total timeline from "I want to file" to "I have my money" is typically 3–6 months for cooperative defendants, longer if enforcement is needed.</p></div></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">What if I have very little documentation? <span class="faq-toggle">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner"><p>Submit your case anyway. Cases with minimal documentation can still succeed — what matters is what evidence you DO have and how well you present it.</p><p>Your action plan will tell you exactly what evidence can still be recovered (bank statements, screenshots, witnesses, contractor license records) and what your realistic chances look like given your situation. Don't assume you have a weak case just because you don't have a written contract.</p></div></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Can a business sue in California small claims? <span class="faq-toggle">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner"><p>Yes. Businesses, corporations, and LLCs can file in small claims court in California. However, the limit for businesses is <strong>$6,250</strong> (vs $12,500 for individuals). A corporation must be represented by a regular employee, officer, or director — not an outside attorney.</p></div></div>
+    </div>
+  </div>
+
+  <div class="cta-strip">
+    <h2>Still have questions?</h2>
+    <p>Call or email directly. Jason responds same business day. Or just start the free analysis and ask in the submission.</p>
+    <div class="cta-strip-btns">
+      <a href="/#intake" class="btn-gold">Get Free Action Plan →</a>
+      <a href="/contact" class="btn-outline-white">Contact Jason</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-brand">Small<span>Claims</span>Pro</div>
+  <div class="footer-links"><a href="/">Home</a><a href="/blog">Guides</a><a href="/faq">FAQ</a><a href="/contact">Contact</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div>
+  <p>SmallClaimsPro · Bakersfield & Kern County · Information only — not legal advice · © 2026</p>
+</footer>
+
+<script>
+function toggleFaq(btn){
+  const item=btn.closest('.faq-item');
+  const wasOpen=item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));
+  if(!wasOpen) item.classList.add('open');
+}
+function filterFaq(cat,btn){
+  document.querySelectorAll('.faq-cat').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.faq-group').forEach(g=>{
+    g.style.display=(cat==='all'||g.dataset.cat===cat)?'block':'none';
+  });
+}
+</script>
+</body>
+</html>

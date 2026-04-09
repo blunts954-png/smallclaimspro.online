@@ -1,101 +1,122 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Thank You | SmallClaimsPro.online</title>
-    <meta
-      name="description"
-      content="Thanks for your submission. SmallClaimsPro has received your case details."
-    />
-    <meta name="robots" content="noindex, nofollow" />
-    <!-- Replace G-ZYCPQEBGTN with your GA4 Measurement ID -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZYCPQEBGTN"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-      gtag("config", "G-ZYCPQEBGTN");
-    </script>
-    <link rel="canonical" href="https://smallclaimspro.online/thank-you.html" />
-    <link rel="stylesheet" href="./styles.css" />
-  </head>
-  <body>
-    <main class="intake">
-      <div class="container">
-        <p>
-          <picture>
-            <source srcset="./logo-header.webp" type="image/webp" />
-            <img class="brand-logo" src="./logo-header.png" alt="SmallClaimsPro" />
-          </picture>
-        </p>
-        <h1>Thanks, you're all set.</h1>
-        <p class="subhead">
-          We received your submission. If you requested a free analysis, watch your email for your
-          first action plan and next steps.
-        </p>
-        <p class="subhead">
-          If you completed checkout, this confirms your order and your delivery email is on the way.
-        </p>
-        <div class="cta-row">
-          <a class="btn btn-secondary" href="./bakersfield-small-claims-checklist.html">
-            Open Bakersfield Small Claims Checklist
-          </a>
-        </div>
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>You're In Motion | SmallClaimsPro</title>
+<meta name="robots" content="noindex"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--navy:#0f1f3d;--navy3:#1e3460;--gold:#c9a84c;--gold2:#e8c76a;--gold-dim:rgba(201,168,76,0.12);--gold-line:rgba(201,168,76,0.25);--cream:#faf8f3;--cream2:#f3efe6;--white:#fff;--text:#1a1a2e;--muted:#6b7280;--border:rgba(15,31,61,0.1);--green:#16a34a;--green-dim:rgba(22,163,74,0.08);--serif:'Playfair Display',Georgia,serif;--sans:'DM Sans',sans-serif;--mono:'DM Mono',monospace;--shadow-lg:0 4px 24px rgba(15,31,61,0.12),0 12px 48px rgba(15,31,61,0.08);}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--navy);min-height:100vh;display:flex;flex-direction:column;font-family:var(--sans);}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+@keyframes checkPop{0%{transform:scale(0)}60%{transform:scale(1.2)}100%{transform:scale(1)}}
+nav{background:rgba(15,31,61,0.95);border-bottom:1px solid rgba(201,168,76,0.2);padding:0 2rem;height:60px;display:flex;align-items:center;justify-content:space-between;}
+.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-logo-mark{width:30px;height:30px;background:var(--gold);border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:15px;font-weight:700;color:var(--navy);}
+.nav-brand-text{font-family:var(--serif);font-size:16px;font-weight:700;color:white;}
+.nav-brand-text span{color:var(--gold);}
 
-        <section class="benefits">
-          <div class="grid">
-            <article>
-              <h2>Purchased: Complete Court Packet ($29)</h2>
-              <p>What happens next:</p>
-              <p>
-                You will receive your customized demand letter, Kern County filing steps, evidence
-                checklist, court script, and process server contacts by email.
-              </p>
-              <p>If you do not see it within 15 minutes, check spam/promotions and then contact support.</p>
-            </article>
-            <article>
-              <h2>Purchased: Done-For-You Document Prep ($99)</h2>
-              <p>What happens next:</p>
-              <p>
-                We begin document prep using your intake details, format required forms, and send a
-                ready-to-file packet for your review, signature, and filing.
-              </p>
-              <p>You may receive a quick follow-up email if any details are missing.</p>
-            </article>
-          </div>
-        </section>
+.page{flex:1;display:flex;align-items:center;justify-content:center;padding:3rem 1.5rem;}
+.card{background:white;border-radius:20px;padding:3rem 2.5rem;max-width:620px;width:100%;box-shadow:var(--shadow-lg);animation:fadeUp 0.6s ease both;}
+.check-circle{width:72px;height:72px;border-radius:50%;background:var(--green-dim);border:2px solid rgba(22,163,74,0.3);display:flex;align-items:center;justify-content:center;margin:0 auto 1.75rem;font-size:2rem;animation:checkPop 0.5s 0.3s ease both;opacity:0;}
+.check-circle.show{animation:checkPop 0.5s 0.3s ease forwards;}
+h1{font-family:var(--serif);font-size:2rem;font-weight:800;color:var(--navy);text-align:center;margin-bottom:0.75rem;line-height:1.15;}
+.sub{font-size:15px;color:var(--muted);text-align:center;line-height:1.7;max-width:460px;margin:0 auto 2.5rem;}
+.sub strong{color:var(--text);}
 
-        <p class="note">
-          Information and document preparation support only. Not legal advice.
-        </p>
+/* STEPS */
+.next-steps{display:flex;flex-direction:column;gap:10px;margin-bottom:2.5rem;}
+.ns-item{display:flex;align-items:flex-start;gap:14px;padding:14px 16px;background:var(--cream);border-radius:10px;border:1px solid var(--border);}
+.ns-num{width:28px;height:28px;border-radius:50%;background:var(--navy);color:white;font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.ns-text{font-size:13px;color:var(--text);line-height:1.55;}
+.ns-text strong{display:block;font-size:14px;margin-bottom:2px;}
 
-        <section class="referral-block" aria-labelledby="referral-title">
-          <h2 id="referral-title">Know someone who is owed money?</h2>
-          <p class="referral-lead">
-            Share SmallClaimsPro — small claims help with demand letters, filing steps, and optional done-for-you prep.
-          </p>
-          <div class="referral-actions">
-            <button id="referralShareBtn" type="button" class="btn btn-primary">
-              Share link
-            </button>
-            <button id="referralCopyBtn" type="button" class="btn btn-secondary">
-              Copy link
-            </button>
-          </div>
-          <p id="referralCopyStatus" class="referral-status" role="status" aria-live="polite"></p>
-          <p class="referral-fine">
-            Referral perks (e.g. bonus review) can be offered by email — ask us after your first purchase.
-          </p>
-        </section>
+/* UPSELL */
+.upsell-box{background:var(--navy);border-radius:14px;padding:2rem;margin-bottom:1.5rem;position:relative;overflow:hidden;}
+.upsell-box::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold2),var(--gold));}
+.upsell-tag{font-family:var(--mono);font-size:10px;letter-spacing:0.16em;color:var(--gold);text-transform:uppercase;margin-bottom:0.75rem;}
+.upsell-title{font-family:var(--serif);font-size:1.3rem;font-weight:700;color:white;margin-bottom:0.5rem;}
+.upsell-desc{font-size:13px;color:rgba(255,255,255,0.6);line-height:1.65;margin-bottom:1.25rem;}
+.upsell-features{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1.5rem;}
+.uf{font-size:12px;color:rgba(255,255,255,0.75);display:flex;align-items:center;gap:6px;}
+.uf::before{content:'✓';color:var(--gold);font-weight:700;flex-shrink:0;}
+.upsell-btn{display:block;text-align:center;background:var(--gold);color:var(--navy);padding:14px;border-radius:8px;font-size:15px;font-weight:700;text-decoration:none;transition:all 0.2s;}
+.upsell-btn:hover{background:var(--gold2);transform:translateY(-1px);}
+.upsell-price{font-family:var(--serif);font-size:1.2rem;}
 
-        <div class="cta-row">
-          <a class="btn btn-primary" href="./index.html">Back to Homepage</a>
-        </div>
+.skip-link{display:block;text-align:center;font-size:13px;color:var(--muted);text-decoration:none;margin-top:1rem;transition:color 0.2s;}
+.skip-link:hover{color:var(--navy);}
+
+/* COAI PITCH */
+.coai-pitch{background:var(--cream2);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-top:1.5rem;}
+.cp-label{font-family:var(--mono);font-size:9px;letter-spacing:0.16em;color:var(--muted);text-transform:uppercase;margin-bottom:0.5rem;}
+.cp-text{font-size:13px;color:var(--text);line-height:1.65;margin-bottom:1rem;}
+.cp-link{font-size:13px;color:var(--navy);font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:4px;}
+.cp-link:hover{text-decoration:underline;}
+
+footer{background:#08142a;padding:1.5rem;text-align:center;border-top:1px solid rgba(201,168,76,0.1);}
+footer p{font-size:11px;color:rgba(255,255,255,0.25);}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="nav-brand">
+    <div class="nav-logo-mark">S</div>
+    <span class="nav-brand-text">Small<span>Claims</span>Pro</span>
+  </a>
+  <div style="font-family:var(--mono);font-size:10px;color:rgba(255,255,255,0.4);">KERN COUNTY · BAKERSFIELD</div>
+</nav>
+
+<div class="page">
+  <div class="card">
+    <div class="check-circle show">✓</div>
+    <h1>You're in motion.</h1>
+    <p class="sub">Your free case analysis is on its way. <strong>Check your inbox in the next few minutes</strong> — including your spam folder just in case. Jason reviews every submission personally.</p>
+
+    <div class="next-steps">
+      <div class="ns-item">
+        <div class="ns-num">1</div>
+        <div class="ns-text"><strong>Check your email</strong>Your action plan, case priorities, and Kern County filing checklist will arrive shortly. Reply to that email with any questions.</div>
       </div>
-    </main>
-    <script src="./thank-you.js"></script>
-  </body>
+      <div class="ns-item">
+        <div class="ns-num">2</div>
+        <div class="ns-text"><strong>Gather your proof</strong>While you wait: pull together texts, receipts, contracts, photos, and bank records. The more organized you are, the stronger your position.</div>
+      </div>
+      <div class="ns-item">
+        <div class="ns-num">3</div>
+        <div class="ns-text"><strong>Send your demand letter</strong>The free plan tells you what to write. The $29 Court Packet has it already drafted and ready to send today.</div>
+      </div>
+    </div>
+
+    <div class="upsell-box">
+      <div class="upsell-tag">Want results faster?</div>
+      <div class="upsell-title">Court Packet — Your demand letter is already written.</div>
+      <div class="upsell-desc">Skip the waiting. Get your demand letter drafted in California legal language, Kern County SC-100 filing steps, evidence checklist, and a hearing script — all in one packet.</div>
+      <div class="upsell-features">
+        <div class="uf">Demand letter — ready to send</div>
+        <div class="uf">Kern County filing steps</div>
+        <div class="uf">Evidence checklist</div>
+        <div class="uf">Hearing script & talking points</div>
+      </div>
+      <a href="https://square.link/u/Y6Wb0XPx" target="_blank" class="upsell-btn">Get My Court Packet — <span class="upsell-price">$29</span> →</a>
+    </div>
+
+    <a href="https://square.link/u/vSbyYSIn" target="_blank" class="skip-link">Need full document prep? Done-For-You Prep — $99 →</a>
+
+    <div class="coai-pitch">
+      <div class="cp-label">PS — Do you run a business?</div>
+      <p class="cp-text">If you own or operate a business in the 661, your website might be costing you leads right now. Free 15-minute audit from the team that built this tool.</p>
+      <a href="https://chaoticallyorganizedai.com/intake" target="_blank" class="cp-link">Free audit at chaoticallyorganizedai.com →</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>SmallClaimsPro · Information and document prep support only — not legal advice · © 2026</p>
+</footer>
+</body>
 </html>

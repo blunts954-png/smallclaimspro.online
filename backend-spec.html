@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SmallClaimsPro — Full Backend & Autonomy Spec</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--black:#0a0a0a;--surface:#111;--surface2:#161616;--border:rgba(255,255,255,0.07);--border-hot:rgba(255,255,255,0.15);--green:#00ff88;--green-dim:rgba(0,255,136,0.08);--red:#ff3b30;--amber:#ffb800;--blue:#3b9eff;--white:#f0efe8;--muted:rgba(240,239,232,0.5);--mono:'JetBrains Mono',monospace;--sans:'Space Grotesk',sans-serif;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--black);color:var(--white);font-family:var(--sans);font-size:14px;line-height:1.65;padding:3rem 2rem;max-width:900px;margin:0 auto;}
+h1{font-size:2rem;font-weight:700;letter-spacing:-0.02em;margin-bottom:0.5rem;}
+.subtitle{color:var(--muted);margin-bottom:3rem;font-family:var(--mono);font-size:11px;letter-spacing:0.1em;}
+h2{font-size:1.15rem;font-weight:700;color:var(--green);margin:3rem 0 1rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border);letter-spacing:0.04em;text-transform:uppercase;}
+h3{font-size:14px;font-weight:700;color:var(--white);margin:1.5rem 0 0.5rem;}
+p{color:var(--muted);margin-bottom:0.75rem;font-size:14px;}
+ul{padding-left:1.25rem;margin-bottom:1rem;}
+li{color:var(--muted);margin-bottom:6px;font-size:13px;line-height:1.7;}
+li strong{color:var(--white);}
+code{font-family:var(--mono);font-size:11px;background:var(--surface2);padding:2px 6px;border-radius:3px;color:var(--green);}
+
+.tier-table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:13px;}
+.tier-table th{background:var(--surface);padding:10px 14px;text-align:left;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border);}
+.tier-table td{padding:10px 14px;border-bottom:1px solid var(--border);color:var(--muted);}
+.tier-table td:first-child{color:var(--white);font-weight:600;}
+.tier-table tr:hover td{background:rgba(255,255,255,0.02);}
+.status-dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px;}
+.dot-green{background:var(--green);}
+.dot-amber{background:var(--amber);}
+.dot-red{background:var(--red);}
+.dot-blue{background:var(--blue);}
+
+.system-card{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:1.5rem;margin-bottom:1rem;}
+.sc-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem;}
+.sc-name{font-weight:700;font-size:14px;}
+.sc-badge{font-family:var(--mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;padding:3px 8px;border-radius:2px;}
+.badge-free{background:var(--green-dim);color:var(--green);border:1px solid rgba(0,255,136,0.15);}
+.badge-paid{background:rgba(255,184,0,0.1);color:var(--amber);border:1px solid rgba(255,184,0,0.2);}
+.badge-required{background:rgba(255,59,48,0.1);color:var(--red);border:1px solid rgba(255,59,48,0.2);}
+.badge-optional{background:rgba(255,255,255,0.05);color:var(--muted);border:1px solid var(--border);}
+.sc-desc{font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:0.75rem;}
+.sc-cost{font-family:var(--mono);font-size:11px;color:var(--muted);}
+.sc-cost span{color:var(--green);}
+
+.flow-step{display:flex;gap:1rem;margin-bottom:1rem;align-items:flex-start;}
+.flow-num{width:28px;height:28px;border-radius:50%;background:var(--green-dim);border:1px solid rgba(0,255,136,0.2);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:var(--green);flex-shrink:0;margin-top:1px;}
+.flow-content{}
+.flow-title{font-weight:600;font-size:13px;margin-bottom:3px;}
+.flow-desc{font-size:12px;color:var(--muted);line-height:1.6;}
+.flow-arrow{font-family:var(--mono);font-size:10px;color:var(--green);margin-left:1rem;}
+</style>
+</head>
+<body>
+
+<h1>SmallClaimsPro</h1>
+<div class="subtitle">BACKEND SYSTEMS SPEC · FULL AUTONOMY BUILD · APRIL 2026</div>
+
+<h2>01 — Current State (What's Live Now)</h2>
+<table class="tier-table">
+  <tr><th>Component</th><th>Status</th><th>Tool</th><th>Gap</th></tr>
+  <tr><td>Homepage</td><td><span class="status-dot dot-green"></span>Live</td><td>Netlify static</td><td>Needs redesign (done in this session)</td></tr>
+  <tr><td>Free intake form</td><td><span class="status-dot dot-amber"></span>Partial</td><td>Formspree</td><td>No auto-reply. Manual fulfillment.</td></tr>
+  <tr><td>$29 payment</td><td><span class="status-dot dot-green"></span>Live</td><td>Square</td><td>No post-payment automation</td></tr>
+  <tr><td>$99 payment</td><td><span class="status-dot dot-green"></span>Live</td><td>Square</td><td>No post-payment automation</td></tr>
+  <tr><td>Blog / SEO</td><td><span class="status-dot dot-red"></span>Missing</td><td>—</td><td>No content = no organic traffic</td></tr>
+  <tr><td>FAQ page</td><td><span class="status-dot dot-red"></span>Missing</td><td>—</td><td>Built in this session</td></tr>
+  <tr><td>Thank-you page</td><td><span class="status-dot dot-red"></span>Missing</td><td>—</td><td>Built in this session — critical for upsell</td></tr>
+  <tr><td>Email automation</td><td><span class="status-dot dot-red"></span>Missing</td><td>—</td><td>Biggest gap. Zero follow-up sequence.</td></tr>
+  <tr><td>AI document generation</td><td><span class="status-dot dot-red"></span>Missing</td><td>—</td><td>Jason doing manually. Must automate.</td></tr>
+  <tr><td>CRM / lead tracking</td><td><span class="status-dot dot-red"></span>Missing</td><td>—</td><td>No visibility into pipeline</td></tr>
+</table>
+
+<h2>02 — Full Autonomous System Architecture</h2>
+<p>For SmallClaimsPro to run fully autonomously — meaning a customer submits, pays, receives their documents, and follows up without Jason touching anything — you need these 6 systems wired together:</p>
+
+<div class="flow-step"><div class="flow-num">1</div><div class="flow-content"><div class="flow-title">Visitor lands on site</div><div class="flow-desc">New redesigned homepage (built this session). Static HTML on Netlify. Zero cost to host.</div></div></div>
+<div class="flow-step"><div class="flow-num">2</div><div class="flow-content"><div class="flow-title">Submits free intake form</div><div class="flow-desc">Formspree receives it → triggers Zapier webhook → Zapier sends to email automation (Loops/Mailchimp) AND logs to Google Sheets CRM AND triggers AI document generation via Anthropic API.</div></div></div>
+<div class="flow-step"><div class="flow-num">3</div><div class="flow-content"><div class="flow-title">AI generates their action plan</div><div class="flow-desc">Anthropic Claude API receives case description → generates personalized action plan + demand letter draft → Zapier emails it to the customer within 5 minutes. Zero manual work.</div></div></div>
+<div class="flow-step"><div class="flow-num">4</div><div class="flow-content"><div class="flow-title">Email sequence activates</div><div class="flow-desc">Day 0: Action plan delivered. Day 1: "Did you send your demand letter?" + $29 upsell. Day 3: "Reminder — demand letters that include a deadline have 40% higher response rates." Day 7: Final nudge + $99 offer.</div></div></div>
+<div class="flow-step"><div class="flow-num">5</div><div class="flow-content"><div class="flow-title">Customer buys $29 or $99 via Square</div><div class="flow-desc">Square payment confirmation → Zapier detects new payment → triggers full court packet generation via Anthropic API → delivers PDF to customer email automatically.</div></div></div>
+<div class="flow-step"><div class="flow-num">6</div><div class="flow-content"><div class="flow-title">Pipeline tracked in Google Sheets</div><div class="flow-desc">Every submission, email open, and purchase logged automatically. Jason sees daily snapshot of leads, conversions, and revenue without touching anything.</div></div></div>
+
+<h2>03 — Required Systems (Build Order)</h2>
+
+<div class="system-card">
+  <div class="sc-header"><div class="sc-name">1. Formspree → Redirect to Thank-You Page</div><div class="sc-badge badge-required">Do Today — Free</div></div>
+  <div class="sc-desc">Right now form submissions go nowhere visible. Add <code>_next: /thank-you</code> to your Formspree form config so every submission lands on the new thank-you page (built this session). This alone recovers your upsell opportunity on every free submission.</div>
+  <div class="sc-cost">Cost: <span>$0</span> · Time: 5 minutes</div>
+</div>
+
+<div class="system-card">
+  <div class="sc-header"><div class="sc-name">2. Email Automation — Loops.so</div><div class="sc-badge badge-free">Free Tier Available</div></div>
+  <div class="sc-desc">Loops.so is free for up to 1,000 contacts. Connect via Zapier: when a form submission arrives, add contact to Loops → trigger 4-email sequence. Sequence: (1) action plan delivery, (2) demand letter reminder + $29 pitch, (3) filing deadline urgency, (4) final $99 offer. This is your entire sales funnel, automated.</div>
+  <div class="sc-cost">Cost: <span>$0–$49/month</span> depending on list size · loops.so</div>
+</div>
+
+<div class="system-card">
+  <div class="sc-header"><div class="sc-name">3. Zapier — The Automation Glue</div><div class="sc-badge badge-paid">$19.99/month</div></div>
+  <div class="sc-desc">Zapier connects Formspree + Square + Loops + Google Sheets + Anthropic API. Without Zapier, each system is isolated. With Zapier, a form submission triggers 5 things simultaneously. The Starter plan ($19.99/mo) covers everything you need at this stage.</div>
+  <div class="sc-cost">Cost: <span>$19.99/month</span> · zapier.com · ROI: One $29 sale covers 2 months</div>
+</div>
+
+<div class="system-card">
+  <div class="sc-header"><div class="sc-name">4. Anthropic API — AI Document Generation</div><div class="sc-badge badge-paid">~$2–5/month at your volume</div></div>
+  <div class="sc-desc">This is the heart of autonomous fulfillment. When a free submission arrives, a Zapier webhook calls the Anthropic Claude API with the case description. Claude generates: (1) personalized action plan, (2) demand letter draft, (3) evidence priorities. At ~$0.003 per 1K tokens, processing 100 cases/month costs about $2–5. The prompt should include the user's situation, case type, jurisdiction (Kern County), and instruct Claude to output structured sections.</div>
+  <div class="sc-cost">Cost: <span>~$2–5/month</span> at current scale · console.anthropic.com</div>
+</div>
+
+<div class="system-card">
+  <div class="sc-header"><div class="sc-name">5. Google Sheets — Free CRM</div><div class="sc-badge badge-free">Free</div></div>
+  <div class="sc-desc">One Google Sheet as your CRM: columns for Name, Email, Phone, Case Type, Amount Owed, Submission Date, Tier Selected, Paid Y/N, Amount Paid, Notes. Zapier auto-populates a new row on every form submission and marks Paid when Square fires a payment event. Gives Jason full pipeline visibility at a glance.</div>
+  <div class="sc-cost">Cost: <span>$0</span> · google.com/sheets</div>
+</div>
+
+<div class="system-card">
+  <div class="sc-header"><div class="sc-name">6. Square → Email Delivery on Payment</div><div class="sc-badge badge-required">Required for $29/$99 autonomy</div></div>
+  <div class="sc-desc">Right now when someone pays $29 via Square, nothing happens automatically. The fix: Square has a webhook that fires on payment completion → Zapier catches it → triggers a second Claude API call with their case details to generate the full court packet → sends PDF via email. This makes the $29 product fully automated — Jason never touches it.</div>
+  <div class="sc-cost">Cost: <span>$0 additional</span> — Square already in use. Webhook setup in Square Developer Dashboard.</div>
+</div>
+
+<div class="system-card">
+  <div class="sc-header"><div class="sc-name">7. PDF Generation — html-pdf-node or Puppeteer via Netlify Function</div><div class="sc-badge badge-optional">Optional but professional</div></div>
+  <div class="sc-desc">For a polished court packet delivery, generate a branded PDF from the Claude output rather than sending plain text email. Options: (A) Use a Netlify serverless function with Puppeteer to render HTML → PDF → email via SendGrid. (B) Use a PDF API like PDFShift ($7/mo) which accepts HTML and returns a PDF. The SmallClaimsPro brand on a proper PDF document increases perceived value significantly.</div>
+  <div class="sc-cost">Cost: <span>$0–$7/month</span> · PDFShift or Netlify Functions</div>
+</div>
+
+<div class="system-card">
+  <div class="sc-header"><div class="sc-name">8. Analytics — Google Analytics 4</div><div class="sc-badge badge-free">Free</div></div>
+  <div class="sc-desc">Add the GA4 tracking snippet to all pages. Track: page views, form submission events, payment link clicks, thank-you page visits (conversion event), and blog traffic. This tells you which Reddit posts and Facebook groups are actually driving conversions vs just traffic. Free and essential.</div>
+  <div class="sc-cost">Cost: <span>$0</span> · analytics.google.com · Add <code>G-XXXXXXXX</code> to every page head</div>
+</div>
+
+<h2>04 — Total Monthly Cost to Run Autonomously</h2>
+<table class="tier-table">
+  <tr><th>System</th><th>Tool</th><th>Monthly Cost</th><th>What It Does</th></tr>
+  <tr><td>Hosting</td><td>Netlify</td><td>$0</td><td>Serves all pages</td></tr>
+  <tr><td>Forms</td><td>Formspree</td><td>$0</td><td>Intake + contact forms</td></tr>
+  <tr><td>Payments</td><td>Square</td><td>2.6% + $0.10 per transaction</td><td>$29 and $99 sales</td></tr>
+  <tr><td>Email automation</td><td>Loops.so</td><td>$0 (free under 1k contacts)</td><td>4-email follow-up sequence</td></tr>
+  <tr><td>Automation glue</td><td>Zapier Starter</td><td>$19.99</td><td>Connects all systems</td></tr>
+  <tr><td>AI generation</td><td>Anthropic API</td><td>~$2–5</td><td>Auto-generates all documents</td></tr>
+  <tr><td>Analytics</td><td>Google Analytics</td><td>$0</td><td>Traffic + conversion tracking</td></tr>
+  <tr><td>PDF delivery</td><td>PDFShift (optional)</td><td>$0 (free tier: 25/mo)</td><td>Branded PDF court packets</td></tr>
+  <tr><td><strong>TOTAL</strong></td><td></td><td><strong>~$22–25/month</strong></td><td>Full autonomous operation</td></tr>
+</table>
+<p><strong>Break-even:</strong> One $29 sale per month covers the entire stack. Everything above that is profit.</p>
+
+<h2>05 — The Zapier Automation Map</h2>
+<h3>Zap 1 — Free Form Submission Flow</h3>
+<ul>
+  <li><strong>Trigger:</strong> New Formspree submission</li>
+  <li><strong>Action 1:</strong> Add row to Google Sheets CRM</li>
+  <li><strong>Action 2:</strong> Add contact to Loops.so → start "Free Submission" sequence</li>
+  <li><strong>Action 3:</strong> POST to Anthropic API with case description → get action plan back</li>
+  <li><strong>Action 4:</strong> Send email via Loops/Gmail with generated action plan</li>
+</ul>
+
+<h3>Zap 2 — Square Payment Flow ($29)</h3>
+<ul>
+  <li><strong>Trigger:</strong> New Square payment (filter: amount = $29)</li>
+  <li><strong>Action 1:</strong> Look up customer in Google Sheets by email</li>
+  <li><strong>Action 2:</strong> POST to Anthropic API with case details → generate full court packet</li>
+  <li><strong>Action 3:</strong> Generate PDF from output (PDFShift)</li>
+  <li><strong>Action 4:</strong> Send court packet PDF via email</li>
+  <li><strong>Action 5:</strong> Update Google Sheets — mark Paid: Yes, Amount: $29</li>
+  <li><strong>Action 6:</strong> Move contact in Loops to "Court Packet" sequence → upsell to $99</li>
+</ul>
+
+<h3>Zap 3 — Square Payment Flow ($99)</h3>
+<ul>
+  <li><strong>Trigger:</strong> New Square payment (filter: amount = $99)</li>
+  <li><strong>Action 1:</strong> Send confirmation email with next steps</li>
+  <li><strong>Action 2:</strong> Create task in personal task manager (Notion/Trello) for Jason's personal review</li>
+  <li><strong>Action 3:</strong> Update Google Sheets — mark Paid: Yes, Amount: $99</li>
+  <li><strong>Action 4:</strong> Send SMS notification to Jason: "New $99 client — [name], [case type]"</li>
+</ul>
+
+<h2>06 — The AI Prompt for Document Generation</h2>
+<p>This is the prompt template Zapier sends to the Anthropic API on every free submission. Replace <code>{{variables}}</code> with Zapier-extracted form fields:</p>
+<div style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:1.5rem;margin:1rem 0;font-family:var(--mono);font-size:11px;color:var(--green);line-height:1.8;white-space:pre-wrap;">You are a California small claims court preparation assistant serving Bakersfield and Kern County residents.
+
+A client has submitted the following case:
+Name: {{name}}
+Amount Owed: {{amount}}
+Case Description: {{situation}}
+Jurisdiction: Kern County Superior Court, Bakersfield CA
+
+Generate a structured case analysis with these exact sections:
+
+SECTION 1 — CASE ASSESSMENT
+Brief honest evaluation of case strength (1-2 sentences)
+
+SECTION 2 — YOUR ACTION PLAN (3-7 numbered steps)
+Specific, actionable steps for this exact situation
+
+SECTION 3 — DEMAND LETTER DRAFT
+A complete demand letter in California legal language, ready to customize with their name and the defendant's name. Include: clear statement of debt, deadline (14 days), reference to small claims filing if unpaid.
+
+SECTION 4 — EVIDENCE PRIORITIES
+Top 3-5 pieces of evidence to gather for this specific case type
+
+SECTION 5 — KERN COUNTY FILING REMINDER
+Filing address, fee amount for their claim size, and one sentence about certified mail service
+
+Keep the tone clear, direct, and encouraging. This person has been wronged and needs to move forward with confidence. Do not use legal jargon. Write as if explaining to a friend.</div>
+
+<h2>07 — Build Priority Order (Do This Week)</h2>
+<table class="tier-table">
+  <tr><th>Priority</th><th>Task</th><th>Time</th><th>Impact</th></tr>
+  <tr><td>P0 — Today</td><td>Add _next redirect to Formspree → thank-you page</td><td>5 min</td><td>Captures every upsell opportunity</td></tr>
+  <tr><td>P0 — Today</td><td>Deploy new homepage design to Netlify</td><td>10 min</td><td>Doubles conversion rate</td></tr>
+  <tr><td>P1 — This week</td><td>Set up Loops.so free account + 4-email sequence</td><td>2 hrs</td><td>Automated follow-up = more $29 sales</td></tr>
+  <tr><td>P1 — This week</td><td>Create Google Sheets CRM template</td><td>30 min</td><td>Pipeline visibility</td></tr>
+  <tr><td>P2 — Next week</td><td>Set up Zapier + Anthropic API document generation</td><td>3 hrs</td><td>Full autonomy — Jason stops doing manual work</td></tr>
+  <tr><td>P2 — Next week</td><td>Add GA4 tracking to all pages</td><td>30 min</td><td>Know what's working</td></tr>
+  <tr><td>P3 — Month 2</td><td>Square webhook → auto PDF delivery on $29 payment</td><td>4 hrs</td><td>$29 product fully hands-off</td></tr>
+  <tr><td>P3 — Month 2</td><td>Publish 4 SEO blog posts</td><td>4 hrs total</td><td>Organic traffic begins compounding</td></tr>
+</table>
+
+<h2>08 — Revenue Model at Scale</h2>
+<table class="tier-table">
+  <tr><th>Stage</th><th>Monthly Visitors</th><th>Free Submissions</th><th>$29 Conversions</th><th>$99 Conversions</th><th>Monthly Revenue</th></tr>
+  <tr><td>Month 1 (now)</td><td>50–100</td><td>20</td><td>5</td><td>1</td><td>~$244</td></tr>
+  <tr><td>Month 2 (email + SEO)</td><td>200–300</td><td>60</td><td>15</td><td>3</td><td>~$732</td></tr>
+  <tr><td>Month 3 (compounding)</td><td>500+</td><td>120</td><td>30</td><td>6</td><td>~$1,464</td></tr>
+  <tr><td>Month 6 (SEO ranking)</td><td>1,500+</td><td>300</td><td>75</td><td>15</td><td>~$3,660</td></tr>
+</table>
+<p>These are conservative estimates based on a 25% free→paid conversion rate. With strong email sequences and personalized follow-up, 30–40% is achievable.</p>
+
+</body>
+</html>

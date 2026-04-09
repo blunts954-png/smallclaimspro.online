@@ -1,40 +1,158 @@
-<!doctype html>
+<!-- CONTACT PAGE -->
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contact | SmallClaimsPro.online</title>
-    <meta name="description" content="Contact SmallClaimsPro.online support." />
-    <link rel="canonical" href="https://smallclaimspro.online/contact.html" />
-    <link rel="stylesheet" href="./styles.css" />
-  </head>
-  <body>
-    <main class="intake">
-      <div class="container">
-        <h1>Contact Us</h1>
-        <p class="subhead">Need support with your intake, checklist, or purchase? Reach us directly.</p>
-        <section class="benefits">
-          <div class="grid">
-            <article>
-              <h2>Email</h2>
-              <p><a href="mailto:support@smallclaimspro.online">support@smallclaimspro.online</a></p>
-            </article>
-            <article>
-              <h2>Phone</h2>
-              <p><a href="tel:+16616109198">(661) 610-9198</a></p>
-            </article>
-            <article>
-              <h2>Service Area</h2>
-              <p>Bakersfield and Kern County, California</p>
-            </article>
-          </div>
-        </section>
-        <p class="note">Information and document prep support only. Not legal advice.</p>
-        <div class="cta-row">
-          <a class="btn btn-primary" href="./index.html#intake">Start free analysis</a>
-          <a class="btn btn-secondary" href="./index.html">Back to homepage</a>
-        </div>
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Contact | SmallClaimsPro — Bakersfield Small Claims Help</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--navy:#0f1f3d;--navy3:#1e3460;--gold:#c9a84c;--gold2:#e8c76a;--gold-dim:rgba(201,168,76,0.12);--gold-line:rgba(201,168,76,0.25);--cream:#faf8f3;--cream2:#f3efe6;--white:#fff;--text:#1a1a2e;--muted:#6b7280;--border:rgba(15,31,61,0.1);--border2:rgba(15,31,61,0.06);--green:#16a34a;--serif:'Playfair Display',Georgia,serif;--sans:'DM Sans',sans-serif;--mono:'DM Mono',monospace;--shadow-lg:0 4px 24px rgba(15,31,61,0.12),0 12px 48px rgba(15,31,61,0.08);}
+*{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}
+body{background:var(--cream);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.6;}
+nav{position:sticky;top:0;z-index:100;background:rgba(15,31,61,0.97);backdrop-filter:blur(12px);padding:0 2rem;height:64px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(201,168,76,0.2);}
+.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-logo-mark{width:32px;height:32px;background:var(--gold);border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:16px;font-weight:700;color:var(--navy);}
+.nav-brand-text{font-family:var(--serif);font-size:17px;font-weight:700;color:white;}
+.nav-brand-text span{color:var(--gold);}
+.nav-cta{background:var(--gold);color:var(--navy);padding:9px 20px;border-radius:6px;font-size:13px;font-weight:600;text-decoration:none;}
+.page-hero{background:var(--navy);padding:5rem 2rem 4rem;text-align:center;}
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;color:var(--gold);text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;justify-content:center;gap:8px;}
+.eyebrow::before,.eyebrow::after{content:'';width:20px;height:1px;background:var(--gold);}
+h1{font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);font-weight:800;color:white;margin-bottom:1rem;letter-spacing:-0.02em;}
+.page-sub{font-size:15px;color:rgba(255,255,255,0.6);max-width:480px;margin:0 auto;line-height:1.7;}
+
+.contact-layout{max-width:860px;margin:0 auto;padding:4rem 2rem;display:grid;grid-template-columns:1fr 1.4fr;gap:3rem;align-items:start;}
+
+/* INFO */
+.info-block{background:white;border:1px solid var(--border);border-radius:14px;padding:1.75rem;margin-bottom:1.25rem;}
+.ib-label{font-family:var(--mono);font-size:9px;letter-spacing:0.18em;color:var(--muted);text-transform:uppercase;margin-bottom:1rem;}
+.ib-line{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
+.ib-line:last-child{margin-bottom:0;}
+.ib-icon{width:32px;height:32px;border-radius:8px;background:var(--gold-dim);border:1px solid var(--gold-line);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;}
+.ib-text{font-size:14px;color:var(--text);}
+.ib-text a{color:var(--navy);text-decoration:none;font-weight:500;}
+.ib-text a:hover{color:var(--gold);}
+.ib-text small{display:block;font-size:11px;color:var(--muted);margin-top:1px;}
+.response-badge{background:rgba(22,163,74,0.08);border:1px solid rgba(22,163,74,0.2);border-radius:10px;padding:12px 14px;display:flex;align-items:center;gap:10px;margin-bottom:1.25rem;}
+.rb-dot{width:8px;height:8px;border-radius:50%;background:#16a34a;animation:pulse 2s infinite;flex-shrink:0;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+.rb-text{font-size:13px;color:#15803d;line-height:1.5;}
+.rb-text strong{display:block;}
+
+/* FORM */
+.contact-form-card{background:white;border:1px solid var(--border);border-radius:16px;padding:2.25rem;box-shadow:var(--shadow-lg);}
+.form-title{font-family:var(--serif);font-size:1.2rem;font-weight:700;color:var(--navy);margin-bottom:0.4rem;}
+.form-sub{font-size:13px;color:var(--muted);margin-bottom:2rem;line-height:1.6;}
+.fg{margin-bottom:1.1rem;}
+.fg label{display:block;font-size:11px;font-weight:600;color:var(--navy);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;}
+.fg input,.fg textarea,.fg select{width:100%;background:var(--cream);border:1.5px solid var(--border);color:var(--text);font-family:var(--sans);font-size:14px;padding:11px 13px;border-radius:8px;outline:none;transition:border-color 0.2s;-webkit-appearance:none;}
+.fg input:focus,.fg textarea:focus,.fg select:focus{border-color:var(--navy);background:white;}
+.fg textarea{min-height:100px;resize:vertical;line-height:1.6;}
+.fg input::placeholder,.fg textarea::placeholder{color:var(--muted);}
+.fg-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.submit-btn{width:100%;background:var(--navy);color:white;border:none;border-radius:8px;padding:14px;font-family:var(--sans);font-size:15px;font-weight:600;cursor:pointer;transition:all 0.2s;margin-top:0.5rem;}
+.submit-btn:hover{background:var(--navy3);transform:translateY(-1px);}
+.form-note{font-size:11px;color:var(--muted);text-align:center;margin-top:0.75rem;line-height:1.6;}
+.success-msg{display:none;background:rgba(22,163,74,0.08);border:1px solid rgba(22,163,74,0.2);border-radius:8px;padding:1.25rem;text-align:center;margin-top:1rem;}
+.success-msg p{font-size:14px;color:#15803d;line-height:1.6;}
+
+footer{background:#08142a;padding:2.5rem 2rem;text-align:center;border-top:1px solid rgba(201,168,76,0.15);}
+.footer-brand{font-family:var(--serif);font-size:1.1rem;font-weight:700;color:white;margin-bottom:0.75rem;}
+.footer-brand span{color:var(--gold);}
+.footer-links{display:flex;justify-content:center;flex-wrap:wrap;gap:1.5rem;margin-bottom:1.25rem;}
+.footer-links a{font-size:13px;color:rgba(255,255,255,0.4);text-decoration:none;}
+.footer-links a:hover{color:var(--gold);}
+footer p{font-size:11px;color:rgba(255,255,255,0.25);}
+@media(max-width:768px){.contact-layout{grid-template-columns:1fr;}.fg-row{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="nav-brand"><div class="nav-logo-mark">S</div><span class="nav-brand-text">Small<span>Claims</span>Pro</span></a>
+  <a href="/#intake" class="nav-cta">Start Free →</a>
+</nav>
+
+<div class="page-hero">
+  <div class="eyebrow">Get in Touch</div>
+  <h1>Talk to a real person.</h1>
+  <p class="page-sub">Jason is a Bakersfield local who reviews every submission. No bots. No call centers. Direct line.</p>
+</div>
+
+<div class="contact-layout">
+  <div>
+    <div class="response-badge">
+      <div class="rb-dot"></div>
+      <div class="rb-text"><strong>Same-day response</strong>Submissions received before 4PM Mon–Fri get a reply same day.</div>
+    </div>
+
+    <div class="info-block">
+      <div class="ib-label">Direct Contact</div>
+      <div class="ib-line"><div class="ib-icon">📞</div><div class="ib-text"><a href="tel:6616109198">(661) 610-9198</a><small>Call or text — Jason picks up</small></div></div>
+      <div class="ib-line"><div class="ib-icon">✉</div><div class="ib-text"><a href="mailto:support@smallclaimspro.online">support@smallclaimspro.online</a><small>Email for case questions and support</small></div></div>
+    </div>
+
+    <div class="info-block">
+      <div class="ib-label">Service Area</div>
+      <div class="ib-line"><div class="ib-icon">📍</div><div class="ib-text">Bakersfield & Kern County, CA<small>Also serving all of California</small></div></div>
+      <div class="ib-line"><div class="ib-icon">🏛️</div><div class="ib-text"><a href="https://www.kern.courts.ca.gov/divisions/small-claims" target="_blank">Kern County Small Claims Court</a><small>1415 Truxtun Ave, Bakersfield CA 93301</small></div></div>
+    </div>
+
+    <div class="info-block">
+      <div class="ib-label">Business Hours</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 1rem;font-size:13px;">
+        <span style="color:var(--muted);">Monday–Friday</span><span style="font-weight:600;">9 AM – 6 PM</span>
+        <span style="color:var(--muted);">Saturday</span><span style="font-weight:600;">By appointment</span>
+        <span style="color:var(--muted);">Sunday</span><span style="font-weight:600;">Closed</span>
       </div>
-    </main>
-  </body>
+      <div style="margin-top:0.75rem;font-family:var(--mono);font-size:10px;color:var(--gold);">After-hours submissions reviewed next morning</div>
+    </div>
+  </div>
+
+  <div class="contact-form-card">
+    <div class="form-title">Send a Message</div>
+    <p class="form-sub">For case questions, support issues, or general inquiries. Jason responds personally.</p>
+    <form id="contact-form" action="https://formspree.io/f/mrezgngr" method="POST" onsubmit="handleContact(event)">
+      <input type="hidden" name="form_type" value="scp_contact"/>
+      <div class="fg-row">
+        <div class="fg"><label>Name</label><input type="text" name="name" placeholder="Your name" required/></div>
+        <div class="fg"><label>Phone</label><input type="tel" name="phone" placeholder="(661) 000-0000"/></div>
+      </div>
+      <div class="fg"><label>Email</label><input type="email" name="email" placeholder="you@email.com" required/></div>
+      <div class="fg">
+        <label>What do you need help with?</label>
+        <select name="subject">
+          <option value="">Select a topic</option>
+          <option>Question about my case</option>
+          <option>Question about my submission</option>
+          <option>Issue with a purchase</option>
+          <option>Refund request</option>
+          <option>General small claims question</option>
+          <option>Something else</option>
+        </select>
+      </div>
+      <div class="fg"><label>Message</label><textarea name="message" placeholder="Tell us what's going on..." required></textarea></div>
+      <button type="submit" class="submit-btn">Send Message →</button>
+      <p class="form-note">Or call directly: <a href="tel:6616109198" style="color:var(--navy);font-weight:600;">(661) 610-9198</a></p>
+    </form>
+    <div class="success-msg" id="success-msg"><p>✓ Message received. Jason will reply same business day. Check your email.</p></div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-brand">Small<span>Claims</span>Pro</div>
+  <div class="footer-links"><a href="/">Home</a><a href="/blog">Guides</a><a href="/faq">FAQ</a><a href="/contact">Contact</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div>
+  <p>SmallClaimsPro · Bakersfield & Kern County · Information only — not legal advice · © 2026</p>
+</footer>
+<script>
+function handleContact(e){
+  e.preventDefault();
+  const form=document.getElementById('contact-form');
+  fetch(form.action,{method:'POST',body:new FormData(form),headers:{Accept:'application/json'}})
+    .then(r=>{form.style.display='none';document.getElementById('success-msg').style.display='block';})
+    .catch(()=>form.submit());
+}
+</script>
+</body>
 </html>
