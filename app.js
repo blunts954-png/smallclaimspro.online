@@ -1,8 +1,5 @@
 const CONFIG = {
-  supabaseUrl: "https://qxdoiixdsxgqxylygkxp.supabase.co",
-  supabaseAnonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF4ZG9paXhkc3hncXh5bHlna3hwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU1NjgzNTQsImV4cCI6MjA5MTE0NDM1NH0.KR-zL9Imx-uj_9-k5NLP5G19cg6OU1QJ9XrKfotLB0c",
-  supabaseTable: "intake_submissions",
-  edgeFunctionName: "process-intake-submission",
+  intakeEndpoint: "/.netlify/functions/intake-submit",
   squarePaymentLink29: "https://square.link/u/Y6Wb0XPx",
   squarePaymentLink99: "https://square.link/u/vSbyYSIn",
   thankYouUrl: "./thank-you.html",
@@ -149,43 +146,19 @@ async function handleSubmit(event) {
   trackEvent("intake_submit_started");
 
   try {
-    if (
-      !CONFIG.supabaseUrl.startsWith("http") ||
-      !CONFIG.supabaseAnonKey ||
-      CONFIG.supabaseAnonKey.includes("REPLACE_WITH")
-    ) {
-      throw new Error("Supabase config is not set.");
-    }
-
-    const response = await fetch(
-      `${CONFIG.supabaseUrl}/rest/v1/${CONFIG.supabaseTable}`,
-      {
+    const response = await fetch(CONFIG.intakeEndpoint, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        apikey: CONFIG.supabaseAnonKey,
-        Authorization: `Bearer ${CONFIG.supabaseAnonKey}`,
-        Prefer: "return=minimal",
       },
-      body: JSON.stringify([
-        {
-          name: payload.name || "",
-          email: payload.email || "",
-          phone: payload.phone || "",
-          description: payload.description || "",
-          consent: Boolean(payload.consent),
-          source: payload.source,
-          created_at: payload.createdAt,
-        },
-      ]),
+      body: JSON.stringify(payload),
     }
     );
 
     if (!response.ok) {
-      throw new Error(`Supabase insert failed with status ${response.status}.`);
+      throw new Error(`Intake submit failed with status ${response.status}.`);
     }
 
-    await notifyEdgeFunction(payload);
     localStorage.setItem(SUBMIT_STORAGE_KEY, String(nowMs));
     trackEvent("intake_submit_success");
     statusEl.textContent = "Analysis request received. Check your email soon.";
@@ -237,31 +210,6 @@ async function submitNetlifyFallback(formData) {
   } catch (error) {
     console.error("Netlify fallback failed.", error);
     return false;
-  }
-}
-
-async function notifyEdgeFunction(payload) {
-  if (!CONFIG.edgeFunctionName) {
-    return;
-  }
-
-  const response = await fetch(
-    `${CONFIG.supabaseUrl}/functions/v1/${CONFIG.edgeFunctionName}`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        apikey: CONFIG.supabaseAnonKey,
-        Authorization: `Bearer ${CONFIG.supabaseAnonKey}`,
-      },
-      body: JSON.stringify(payload),
-    }
-  );
-
-  // Do not block intake persistence if function is not deployed yet.
-  if (!response.ok && response.status !== 404) {
-    console.warn("Edge Function call failed.", response.status);
-    trackEvent("intake_edge_function_error");
   }
 }
 

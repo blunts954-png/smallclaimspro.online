@@ -1,6 +1,6 @@
 # Supabase Setup (SmallClaimsPro.online)
 
-Use this guide to connect the landing page form directly to Supabase.
+Use this guide to connect the landing page form through Netlify Functions to Supabase.
 
 ## 1) Create table
 
@@ -25,66 +25,42 @@ create table if not exists public.intake_submissions (
 alter table public.intake_submissions enable row level security;
 ```
 
-## 3) Allow public inserts only
+## 3) Tighten policies (recommended)
 
-This lets your website submit form rows with the anon key.
+Because submissions now run through a server-side Netlify Function using the service role key,
+you should avoid direct public inserts from the browser.
 
 ```sql
-create policy "Allow anon inserts"
-on public.intake_submissions
-for insert
-to anon
-with check (true);
+drop policy if exists "Allow anon inserts" on public.intake_submissions;
 ```
 
-Optional hardening: if you do not need public reads, do not create any select policy.
+Leave RLS enabled and do not create public `select` policies unless required.
 
-## 4) Configure `app.js`
+## 4) Configure Netlify Environment Variables
 
-Update the `CONFIG` values:
+In Netlify -> Site configuration -> Environment variables, add:
 
-- `supabaseUrl`: your project URL (example: `https://qxdoiixdsxgqxylygkxp.supabase.co`)
-- `supabaseAnonKey`: from Supabase -> Settings -> API -> Project API keys -> `anon public`
-- `supabaseTable`: keep as `intake_submissions` unless you renamed it
+- `SUPABASE_URL` (example: `https://your-project-ref.supabase.co`)
+- `SUPABASE_SERVICE_ROLE_KEY` (from Supabase -> Settings -> API -> service_role key)
+- `INTAKE_WEBHOOK_URL` (optional; Slack/Zapier/custom webhook for instant alerts)
 
-Do not put your Postgres password or service-role key in frontend code.
+Do not put the service-role key in frontend code.
 
-## 5) Test
+## 5) Deploy function
+
+This repo includes `netlify/functions/intake-submit.js`.
+
+On deploy, Netlify exposes:
+
+- `/.netlify/functions/intake-submit`
+
+`app.js` posts to this endpoint first and only falls back to Netlify Forms if needed.
+
+## 6) Test end-to-end
 
 1. Deploy or run locally.
 2. Submit the intake form.
-3. In Supabase -> Table Editor -> `intake_submissions`, confirm a new row appears.
-
-## 6) Optional Edge Function (automation hook)
-
-The frontend now calls `process-intake-submission` after a successful insert.
-
-Create function:
-
-```bash
-supabase functions new process-intake-submission
-```
-
-Deploy function:
-
-```bash
-supabase functions deploy process-intake-submission
-```
-
-Basic function shape (reads form payload from request body):
-
-```ts
-import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
-
-serve(async (req) => {
-  const payload = await req.json();
-  console.log("New intake submission:", payload.email, payload.createdAt);
-
-  // TODO: call OpenAI, send email, update CRM, etc.
-  return new Response(JSON.stringify({ ok: true }), {
-    headers: { "Content-Type": "application/json" },
-  });
-});
-```
-
-If the function is not deployed yet, form inserts still succeed.
+3. Submit the intake form from production URL.
+4. Confirm row appears in Supabase `intake_submissions`.
+5. If configured, verify `INTAKE_WEBHOOK_URL` receives the event.
+6. Temporarily break `SUPABASE_SERVICE_ROLE_KEY` and verify fallback still captures form via Netlify Forms.
