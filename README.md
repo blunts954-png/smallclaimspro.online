@@ -1,23 +1,32 @@
-# SmallClaimsPro.online V1 Starter
+# SmallClaimsPro.online Production Starter
 
-Fast-launch static starter for SmallClaimsPro.online.
+Static site + Netlify Functions backend for intake, AI packet generation, and payment fulfillment.
 
 ## What is included
 
 - `index.html` conversion-focused landing page
 - `styles.css` responsive styling
-- `app.js` Supabase + payment-link config
-- `prompts.md` AI system prompts for chatbot/backend automation
+- `netlify/functions/intake-submit.js` canonical intake endpoint
+- `netlify/functions/square-webhook.js` verified Square payment webhook
+- `netlify/functions/_lib/pipeline.js` shared AI/email/ops helpers
+- `PRODUCTION_SCHEMA.sql` dedupe and pipeline-event schema
+- `prompts.md` AI prompt reference
 
-## 10-minute setup
+## Production setup
 
-1. Open `app.js`
-2. Replace:
-   - `REPLACE_WITH_SUPABASE_ANON_KEY`
-   - `REPLACE_WITH_SQUARE_PAYMENT_LINK_29`
-   - `REPLACE_WITH_SQUARE_PAYMENT_LINK_99`
-   - `https://qxdoiixdsxgqxylygkxp.supabase.co`
-3. Save and deploy static files (Vercel recommended)
+1. Run SQL in `PRODUCTION_SCHEMA.sql` and `SUPABASE_SETUP.md`.
+2. Set Netlify env vars:
+   - `SUPABASE_URL`
+   - `SUPABASE_SERVICE_ROLE_KEY`
+   - `OPENAI_API_KEY`
+   - `OPENAI_MODEL` (optional, defaults to `gpt-4.1-mini`)
+   - `RESEND_API_KEY`
+   - `RESEND_FROM_EMAIL`
+   - `AUTO_PROCESS_INTAKE=true`
+   - `SQUARE_WEBHOOK_SIGNATURE_KEY`
+   - `SQUARE_WEBHOOK_NOTIFICATION_URL`
+   - `OPS_ALERT_WEBHOOK_URL` (optional; Slack/Discord webhook)
+3. Deploy to Netlify.
 
 ## Supabase payload expected
 
@@ -35,30 +44,26 @@ The form sends JSON:
 }
 ```
 
-## Suggested automation flow
+## Runtime flow
 
-1. Form row is inserted into Supabase `intake_submissions`
-2. Use Supabase Edge Function / automation tool to process new rows
-3. AI call with `prompts.md` system prompt + user data
-4. Email user with:
-   - summary
-   - action plan
-   - message drafts
-   - upsell/payment CTA
-5. Optional: sync leads to Google Sheet or Airtable
-6. Optional: route high-intent leads to local provider SMS/email
+1. `index.html` posts intake to `/.netlify/functions/intake-submit`
+2. Intake is validated + persisted in Supabase `intake_submissions`
+3. If `AUTO_PROCESS_INTAKE=true`, OpenAI generates free plan and Resend sends email
+4. Square sends signed webhook to `/.netlify/functions/square-webhook`
+5. Webhook event is deduped in `pipeline_events`, then paid packet is generated + delivered
+6. Failures send alerts via `OPS_ALERT_WEBHOOK_URL`
 
 ## Compliance baseline
 
 - Keep disclaimer visible: "Information and document support, not legal advice."
 - Avoid guarantees ("you will win")
-- Keep a manual review for first 20 submissions until quality is stable
+- Keep a manual review for first 20 paid packet deliveries until quality is stable
 
 ## Next fast upgrades
 
-- Add analytics (Plausible or GA4)
-- Add provider CRM tagging (hot/warm/cold)
-- Add paid packet auto-delivery after Square trigger
+- Add PDF generation worker (for branded packet attachments)
+- Add queue (Upstash QStash or Supabase pgmq) for async retries
+- Add admin dashboard for event replay and failed-job recovery
 
 ## Analytics events already wired
 

@@ -567,12 +567,9 @@ footer p{font-size:11px;color:rgba(255,255,255,0.25);line-height:1.7;}
           </div>
         </div>
 
-        <form id="intake-form" action="https://formspree.io/f/mrezgngr" method="POST" onsubmit="handleIntake(event)">
+        <form id="intake-form" method="POST" onsubmit="handleIntake(event)">
           <input type="hidden" name="form_type" value="smallclaimspro_intake"/>
           <input type="hidden" name="selected_tier" id="selected-tier" value="free"/>
-          <input type="hidden" name="_next" value="https://smallclaimspro.netlify.app/thank-you"/>
-          <input type="hidden" name="_cc" value="chaoticallyorganizedai@gmail.com"/>
-          <input type="hidden" name="_subject" value="New SmallClaimsPro Submission"/>
 
           <div class="form-row">
             <div class="form-group"><label>Full Name</label><input type="text" name="full_name" placeholder="Your name" required/></div>
@@ -694,9 +691,9 @@ footer p{font-size:11px;color:rgba(255,255,255,0.25);line-height:1.7;}
     <a href="#how-it-works">How It Works</a>
     <a href="#pricing">Pricing</a>
     <a href="#faq">FAQ</a>
-    <a href="https://smallclaimspro.netlify.app/privacy">Privacy</a>
-    <a href="https://smallclaimspro.netlify.app/terms">Terms</a>
-    <a href="https://smallclaimspro.netlify.app/contact">Contact</a>
+    <a href="https://smallclaimspro.online/privacy.html">Privacy</a>
+    <a href="https://smallclaimspro.online/terms.html">Terms</a>
+    <a href="https://smallclaimspro.online/contact.html">Contact</a>
     <a href="https://www.kern.courts.ca.gov/divisions/small-claims" target="_blank">Kern County Court</a>
   </div>
   <p>SmallClaimsPro · Proudly serving Bakersfield and Kern County · 1712 19th St #216, Bakersfield CA 93301<br>Information and document prep support only. Not legal advice. For legal representation consult a licensed California attorney.<br>© 2026 SmallClaimsPro · A Chaotically Organized AI product</p>
@@ -741,43 +738,48 @@ function handleIntake(e){
   document.getElementById('submit-text').textContent='Sending...';
   const form=document.getElementById('intake-form');
   const formData=new FormData(form);
+  const honeypot=(formData.get('company_website')||'').toString().trim();
+  if(honeypot){
+    document.getElementById('submit-text').textContent='Get My Free Action Plan →';
+    btn.disabled=false;
+    return;
+  }
 
-  // Build JSON payload for Zapier
-  const zapData={
-    full_name: formData.get('full_name')||'',
-    email: formData.get('email')||'',
-    phone: formData.get('phone')||'',
-    situation: formData.get('situation')||'',
-    selected_tier: formData.get('selected_tier')||'free',
-    form_type: formData.get('form_type')||'smallclaimspro_intake',
-    company_website: formData.get('company_website')||''
+  const consentEl=document.getElementById('legal-agree');
+  const payload={
+    name: (formData.get('full_name')||'').toString().trim(),
+    email: (formData.get('email')||'').toString().trim().toLowerCase(),
+    phone: (formData.get('phone')||'').toString().trim(),
+    description: (formData.get('situation')||'').toString().trim(),
+    consent: Boolean(consentEl && consentEl.checked),
+    selectedTier: (formData.get('selected_tier')||'free').toString(),
+    source: 'smallclaimspro-online-v2',
+    createdAt: new Date().toISOString()
   };
 
-  // Fire Zapier webhook (no-cors — fire and forget, don't wait for response)
-  fetch('https://hooks.zapier.com/hooks/catch/27166208/u7fy3f4/',{
+  fetch('/.netlify/functions/intake-submit',{
     method:'POST',
-    mode:'no-cors',
     headers:{'Content-Type':'application/json'},
-    body:JSON.stringify(zapData)
-  }).catch(()=>{});// silent fail — Formspree is the source of truth
-
-  // Fire Formspree — wait for this one to redirect
-  fetch(form.action,{method:'POST',body:formData,headers:{Accept:'application/json'}})
-    .then(r=>{
-      if(r.ok){
-        if(selectedTier==='court'){
-          window.location.href='https://smallclaimspro.netlify.app/thank-you?tier=court';
-        } else if(selectedTier==='prep'){
-          window.location.href='https://smallclaimspro.netlify.app/thank-you?tier=prep';
-        } else {
-          window.location.href='https://smallclaimspro.netlify.app/thank-you';
-        }
+    body:JSON.stringify(payload)
+  })
+    .then(async (r)=>{
+      if(!r.ok){
+        const err=await r.json().catch(()=>({}));
+        throw new Error(err.error||'Submission failed');
+      }
+      if(selectedTier==='court'){
+        window.location.href='https://smallclaimspro.online/thank-you.html?tier=court';
+      } else if(selectedTier==='prep'){
+        window.location.href='https://smallclaimspro.online/thank-you.html?tier=prep';
       } else {
-        document.getElementById('intake-form-wrap').style.display='none';
-        document.getElementById('success-state').style.display='block';
+        window.location.href='https://smallclaimspro.online/thank-you.html';
       }
     })
-    .catch(()=>{ form.submit(); });
+    .catch(()=>{
+      alert('Submission failed. Please email support@smallclaimspro.online and we will help immediately.');
+      btn.disabled=false;
+      document.getElementById('submit-text').textContent='Get My Free Action Plan →';
+    });
 }
 
 // FAQ
