@@ -1,9 +1,10 @@
 /**
  * Production smoke test:
- * node smoke-test.mjs https://smallclaimspro.online
+ * node smoke-test.mjs https://smallclaimspro.online [worker-secret]
  */
 
 const baseUrl = (process.argv[2] || "http://localhost:8888").replace(/\/+$/, "");
+const workerSecret = process.argv[3] || "";
 
 async function run() {
   console.log(`Running smoke test against: ${baseUrl}`);
@@ -34,8 +35,21 @@ async function run() {
     return;
   }
 
+  const workerRes = await fetch(`${baseUrl}/.netlify/functions/queue-worker`, {
+    method: "POST",
+    headers: workerSecret ? { "x-worker-secret": workerSecret } : {},
+  });
+  const workerBody = await workerRes.text();
+  console.log(`queue-worker: ${workerRes.status}`);
+  console.log(workerBody);
+
+  if (!workerRes.ok) {
+    process.exitCode = 1;
+    return;
+  }
+
   console.log(
-    "Intake endpoint is live. Next manual checks: Supabase row inserted, email delivered, ops alerts quiet."
+    "Intake + queue-worker endpoints are live. Next manual checks: Supabase rows, email delivery, review queue behavior, and ops alerts."
   );
 }
 

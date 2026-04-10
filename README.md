@@ -8,6 +8,9 @@ Static site + Netlify Functions backend for intake, AI packet generation, and pa
 - `styles.css` responsive styling
 - `netlify/functions/intake-submit.js` canonical intake endpoint
 - `netlify/functions/square-webhook.js` verified Square payment webhook
+- `netlify/functions/queue-worker.js` async job processor
+- `netlify/functions/admin-replay.js` failed-job replay API
+- `netlify/functions/sla-monitor.js` SLA breach alert endpoint
 - `netlify/functions/_lib/pipeline.js` shared AI/email/ops helpers
 - `PRODUCTION_SCHEMA.sql` dedupe and pipeline-event schema
 - `prompts.md` AI prompt reference
@@ -22,11 +25,18 @@ Static site + Netlify Functions backend for intake, AI packet generation, and pa
    - `OPENAI_MODEL` (optional, defaults to `gpt-4.1-mini`)
    - `RESEND_API_KEY`
    - `RESEND_FROM_EMAIL`
+   - `PDFSHIFT_API_KEY` (optional, attaches branded PDF packet)
    - `AUTO_PROCESS_INTAKE=true`
    - `SQUARE_WEBHOOK_SIGNATURE_KEY`
    - `SQUARE_WEBHOOK_NOTIFICATION_URL`
+   - `WORKER_SECRET`
+   - `ADMIN_REPLAY_TOKEN`
+   - `AI_CONFIDENCE_THRESHOLD` (example: `0.72`)
+   - `JOB_SLA_MINUTES` (example: `15`)
    - `OPS_ALERT_WEBHOOK_URL` (optional; Slack/Discord webhook)
 3. Deploy to Netlify.
+4. Trigger worker on interval (Netlify Scheduled Function or external cron):
+   - `POST /.netlify/functions/queue-worker` with `x-worker-secret`.
 
 ## Supabase payload expected
 
@@ -50,8 +60,9 @@ The form sends JSON:
 2. Intake is validated + persisted in Supabase `intake_submissions`
 3. If `AUTO_PROCESS_INTAKE=true`, OpenAI generates free plan and Resend sends email
 4. Square sends signed webhook to `/.netlify/functions/square-webhook`
-5. Webhook event is deduped in `pipeline_events`, then paid packet is generated + delivered
-6. Failures send alerts via `OPS_ALERT_WEBHOOK_URL`
+5. Intake/payment events enqueue jobs in `pipeline_jobs`
+6. `queue-worker` processes jobs, gates low-confidence output to `review_queue`, and delivers via email/PDF
+7. Failures + SLA delays alert via `OPS_ALERT_WEBHOOK_URL`
 
 ## Compliance baseline
 
@@ -62,8 +73,8 @@ The form sends JSON:
 ## Next fast upgrades
 
 - Add PDF generation worker (for branded packet attachments)
-- Add queue (Upstash QStash or Supabase pgmq) for async retries
-- Add admin dashboard for event replay and failed-job recovery
+- Add lightweight admin UI for `admin-replay` endpoint
+- Add scheduled `sla-monitor` pings if worker cadence is low
 
 ## Analytics events already wired
 

@@ -40,11 +40,11 @@ Leave RLS enabled and do not create public `select` policies unless required.
 
 Run `PRODUCTION_SCHEMA.sql` in Supabase SQL editor.
 
-This creates `pipeline_events`, which powers:
+This creates:
 
-- webhook idempotency (dedupe by `event_id`)
-- delivery status tracking (`received`, `completed`, `failed`)
-- replay visibility for production incidents
+- `pipeline_events` for webhook idempotency
+- `pipeline_jobs` for async queue processing + retries
+- `review_queue` for low-confidence AI outputs requiring human review
 
 ## 5) Configure Netlify Environment Variables
 
@@ -57,8 +57,13 @@ In Netlify -> Site configuration -> Environment variables, add:
 - `OPENAI_MODEL` (optional; defaults to `gpt-4.1-mini`)
 - `RESEND_API_KEY`
 - `RESEND_FROM_EMAIL` (example: `support@smallclaimspro.online`)
+- `PDFSHIFT_API_KEY` (optional; PDF attachments)
 - `SQUARE_WEBHOOK_SIGNATURE_KEY`
 - `SQUARE_WEBHOOK_NOTIFICATION_URL` (exact URL configured in Square dashboard)
+- `WORKER_SECRET` (used by queue worker + SLA monitor)
+- `ADMIN_REPLAY_TOKEN` (for replay endpoint access)
+- `AI_CONFIDENCE_THRESHOLD` (suggested `0.72`)
+- `JOB_SLA_MINUTES` (suggested `15`)
 - `OPS_ALERT_WEBHOOK_URL` (optional; Slack/Discord/webhook for failures)
 - `INTAKE_WEBHOOK_URL` (optional; secondary event sink)
 
@@ -70,11 +75,17 @@ This repo includes:
 
 - `netlify/functions/intake-submit.js`
 - `netlify/functions/square-webhook.js`
+- `netlify/functions/queue-worker.js`
+- `netlify/functions/admin-replay.js`
+- `netlify/functions/sla-monitor.js`
 
 On deploy, Netlify exposes:
 
 - `/.netlify/functions/intake-submit`
 - `/.netlify/functions/square-webhook`
+- `/.netlify/functions/queue-worker`
+- `/.netlify/functions/admin-replay`
+- `/.netlify/functions/sla-monitor`
 
 ## 7) Test end-to-end
 
@@ -84,4 +95,6 @@ On deploy, Netlify exposes:
 4. Confirm row appears in Supabase `intake_submissions`.
 5. Confirm free-plan email sends (if `AUTO_PROCESS_INTAKE=true`).
 6. Create a Square test payment and verify `pipeline_events` records the event.
-7. Confirm paid packet email sends for $29 or $99 tiers.
+7. Trigger `queue-worker` and verify queued jobs complete.
+8. Confirm paid packet email sends for $29 or $99 tiers.
+9. Force a low-confidence run and verify a `review_queue` entry is created.
