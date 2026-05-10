@@ -124,6 +124,8 @@ export function buildJurisdictionContext(stateCode) {
     `Attorney representation: ${s.selfRepNote}`,
     `SOL written contract: ${s.sol.written}`,
     `SOL oral contract: ${s.sol.oral}`,
+    `SOL property damage: ${s.sol.property}`,
+    `SOL personal injury: ${s.sol.personalInjury}`,
     `Court filing info: ${s.courtAddress}`,
     `Court website: ${s.courtUrl}`,
   ].join("\n");
