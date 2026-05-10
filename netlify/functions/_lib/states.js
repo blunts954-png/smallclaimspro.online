@@ -75,7 +75,7 @@ export const STATE_DATA = {
     courtAddress: "File in the Justice Court for the township where the defendant resides or the dispute arose.",
     courtUrl: "https://www.nevadajudiciary.us/index.php/courts/justice-courts",
     forms: "Small Claims Complaint (township-specific form)",
-    selfRepNote: "Attorneys are not allowed to represent parties in Nevada small claims court.",
+    selfRepNote: "Attorneys may appear in Nevada small claims court, though attorney's fees are generally not recoverable. Most cases are self-represented.",
     disclaimer: "For legal representation consult a licensed Nevada attorney.",
   },
   TX: {
