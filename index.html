@@ -580,12 +580,23 @@ footer p{font-size:11px;color:rgba(255,255,255,0.25);line-height:1.7;}
             <div class="form-group"><label>Company Website (if any)</label><input type="url" name="company_website" placeholder="https://yourbiz.com"/></div>
           </div>
           <div class="form-group">
+            <label>Your State <span style="color:var(--red)">*</span></label>
+            <select name="state" id="state-select" required style="width:100%;padding:12px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:15px;font-family:var(--sans);background:white;color:var(--text);cursor:pointer;">
+              <option value="">— Select your state —</option>
+              <option value="CA">California</option>
+              <option value="CO">Colorado</option>
+              <option value="FL">Florida</option>
+              <option value="NV">Nevada</option>
+              <option value="TX">Texas</option>
+            </select>
+          </div>
+          <div class="form-group">
             <label>Who owes you money and what happened?</label>
             <textarea name="situation" placeholder="E.g. My contractor took $3,000 deposit and never finished the roof. I have texts and a written quote. They stopped responding 3 months ago..." required></textarea>
           </div>
           <div class="legal-check">
             <input type="checkbox" id="legal-agree" required/>
-            <label for="legal-agree">I understand SmallClaimsPro provides information, templates, and document prep support only — not legal advice. For legal representation, consult a licensed California attorney.</label>
+            <label for="legal-agree">I understand SmallClaimsPro provides AI-assisted document prep support only — not legal advice. For legal representation, consult a licensed attorney in your state.</label>
           </div>
           <button type="submit" class="submit-btn" id="submit-btn">
             <span id="submit-text">Get My Free Action Plan →</span>
@@ -622,7 +633,7 @@ footer p{font-size:11px;color:rgba(255,255,255,0.25);line-height:1.7;}
           <li>✓ You want a practical checklist and demand letter without hiring a lawyer</li>
           <li>✓ Your dispute is under $12,500</li>
           <li>✓ You want to move fast without legal jargon slowing you down</li>
-          <li>✓ You're in Bakersfield, Kern County, or anywhere in California</li>
+          <li>✓ You're in California, Colorado, Florida, Nevada, or Texas</li>
         </ul>
       </div>
       <div class="fit-col fit-no">
@@ -647,15 +658,15 @@ footer p{font-size:11px;color:rgba(255,255,255,0.25);line-height:1.7;}
     <div class="faq-list">
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">Is this legal advice? <span class="faq-toggle">+</span></button>
-        <div class="faq-a"><div class="faq-a-inner">No. SmallClaimsPro provides educational information, templates, and document preparation support only. It is not a law firm and does not provide legal advice. If you need legal representation, consult a licensed California attorney. For most small claims cases in California, lawyers cannot represent parties at trial anyway — you're on your own in the courtroom regardless.</div></div>
+        <div class="faq-a"><div class="faq-a-inner">No. SmallClaimsPro provides AI-assisted educational information, templates, and document preparation support only. It is not a law firm and does not provide legal advice. If you need legal representation, consult a licensed attorney in your state. In many states (including California and Nevada), attorneys are prohibited from representing parties at small claims trials anyway — you're on your own in the courtroom regardless.</div></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">How much can I claim in California small claims court? <span class="faq-toggle">+</span></button>
-        <div class="faq-a"><div class="faq-a-inner">Individuals can generally claim up to $12,500 in California small claims. Businesses are limited to $6,250. You can file up to two claims per year exceeding $2,500. Always verify the current limit at <a href="https://www.kern.courts.ca.gov/divisions/small-claims" target="_blank">kern.courts.ca.gov</a> before filing as limits can change.</div></div>
+        <button class="faq-q" onclick="toggleFaq(this)">How much can I claim in small claims court? <span class="faq-toggle">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Limits vary by state: <strong>California</strong> $12,500 (individuals) · <strong>Texas</strong> $20,000 · <strong>Nevada</strong> $10,000 · <strong>Florida</strong> $8,000 · <strong>Colorado</strong> $7,500. Always verify the current limit with your local court before filing, as limits can change. Your action plan will include the correct limit and filing info for your state.</div></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">Where is the Kern County small claims courthouse? <span class="faq-toggle">+</span></button>
-        <div class="faq-a"><div class="faq-a-inner">The Kern County Superior Court handles small claims at 1415 Truxtun Avenue, Bakersfield, CA 93301. Filing hours are Monday–Friday 8am–4pm. Filing fees range from $30 to $75 depending on your claim amount. The court clerk's office can answer procedural questions — they're required to assist you.</div></div>
+        <button class="faq-q" onclick="toggleFaq(this)">Where do I file my small claims case? <span class="faq-toggle">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">You file in the court for the county or precinct where the defendant lives or where the dispute occurred. Your action plan will include the specific court name, address, and website for your state. Filing fees typically range from $30–$100 depending on your state and claim amount. Court clerks are required to help you with procedural questions — don't hesitate to call them.</div></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">Do I need to send a demand letter before filing? <span class="faq-toggle">+</span></button>
@@ -696,7 +707,7 @@ footer p{font-size:11px;color:rgba(255,255,255,0.25);line-height:1.7;}
     <a href="https://smallclaimspro.online/contact.html">Contact</a>
     <a href="https://www.kern.courts.ca.gov/divisions/small-claims" target="_blank">Kern County Court</a>
   </div>
-  <p>SmallClaimsPro · Proudly serving Bakersfield and Kern County · 1712 19th St #216, Bakersfield CA 93301<br>Information and document prep support only. Not legal advice. For legal representation consult a licensed California attorney.<br>© 2026 SmallClaimsPro · A Chaotically Organized AI product</p>
+  <p>SmallClaimsPro · Serving California, Colorado, Florida, Nevada &amp; Texas · 1712 19th St #216, Bakersfield CA 93301<br>AI-assisted document prep support only. Not legal advice. For legal representation consult a licensed attorney in your state.<br>© 2026 SmallClaimsPro · A Chaotically Organized AI product</p>
 </footer>
 
 <script>
@@ -753,6 +764,7 @@ function handleIntake(e){
     description: (formData.get('situation')||'').toString().trim(),
     consent: Boolean(consentEl && consentEl.checked),
     selectedTier: (formData.get('selected_tier')||'free').toString(),
+    state: (formData.get('state')||'CA').toString().toUpperCase().trim(),
     source: 'smallclaimspro-online-v2',
     createdAt: new Date().toISOString()
   };

@@ -8,6 +8,7 @@ import {
   notifyWebhook,
   persistSubmission,
 } from "./_lib/pipeline.js";
+import { SUPPORTED_STATES } from "./_lib/states.js";
 
 const REQUIRED_ENV_VARS = ["SUPABASE_URL", "SUPABASE_SERVICE_ROLE_KEY"];
 
@@ -65,6 +66,7 @@ function normalizePayload(raw) {
     source: String(raw?.source || "smallclaimspro-online-v2").trim(),
     createdAt: String(raw?.createdAt || new Date().toISOString()),
     selectedTier: String(raw?.selectedTier || "free").trim(),
+    state: String(raw?.state || "CA").toUpperCase().trim(),
   };
 }
 
@@ -77,6 +79,9 @@ function validatePayload(payload) {
     return "Case details are too short.";
   }
   if (!payload.consent) return "Consent is required.";
+  if (!SUPPORTED_STATES.includes(payload.state)) {
+    return `State must be one of: ${SUPPORTED_STATES.join(", ")}.`;
+  }
   return null;
 }
 
