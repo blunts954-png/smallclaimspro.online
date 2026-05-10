@@ -66,7 +66,7 @@ function normalizePayload(raw) {
     source: String(raw?.source || "smallclaimspro-online-v2").trim(),
     createdAt: String(raw?.createdAt || new Date().toISOString()),
     selectedTier: String(raw?.selectedTier || "free").trim(),
-    state: String(raw?.state || "CA").toUpperCase().trim(),
+    state: String(raw?.state || "").toUpperCase().trim(),
   };
 }
 
