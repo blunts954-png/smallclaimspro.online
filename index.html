@@ -395,9 +395,9 @@ footer p{font-size:11px;color:rgba(255,255,255,0.25);line-height:1.7;}
     <div class="proof-divider"></div>
     <div class="proof-stat"><div class="proof-num">$29</div><div class="proof-lbl">Full court packet</div></div>
     <div class="proof-divider"></div>
-    <div class="proof-stat"><div class="proof-num">Kern Co.</div><div class="proof-lbl">Local filing guidance</div></div>
+    <div class="proof-stat"><div class="proof-num">5 States</div><div class="proof-lbl">CA · CO · FL · NV · TX</div></div>
     <div class="proof-divider"></div>
-    <div class="proof-stat"><div class="proof-num">No lawyer</div><div class="proof-lbl">Required in CA small claims</div></div>
+    <div class="proof-stat"><div class="proof-num">No lawyer</div><div class="proof-lbl">Required in most small claims courts</div></div>
   </div>
 </div>
 
@@ -764,7 +764,7 @@ function handleIntake(e){
     description: (formData.get('situation')||'').toString().trim(),
     consent: Boolean(consentEl && consentEl.checked),
     selectedTier: (formData.get('selected_tier')||'free').toString(),
-    state: (formData.get('state')||'CA').toString().toUpperCase().trim(),
+    state: (formData.get('state')||'').toString().toUpperCase().trim(),
     source: 'smallclaimspro-online-v2',
     createdAt: new Date().toISOString()
   };
