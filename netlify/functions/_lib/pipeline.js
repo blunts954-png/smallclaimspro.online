@@ -87,6 +87,7 @@ export async function persistSubmission(payload) {
         consent: payload.consent,
         source: payload.source,
         created_at: payload.createdAt,
+        state: payload.state,
       },
     ],
     noContentExpected: true,
@@ -154,7 +155,7 @@ export async function updatePipelineEventStatus(eventId, status, errorMessage = 
 export async function getLatestSubmissionByEmail(email) {
   const normalized = normalizeEmail(email);
   const rows = await supabaseRequest(
-    `intake_submissions?select=name,email,phone,description,source,created_at&email=eq.${encodeURIComponent(
+    `intake_submissions?select=name,email,phone,description,source,state,created_at&email=eq.${encodeURIComponent(
       normalized
     )}&order=created_at.desc&limit=1`
   );

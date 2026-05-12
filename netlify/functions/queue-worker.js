@@ -13,6 +13,7 @@ import {
   sendResendEmail,
   withRetries,
 } from "./_lib/pipeline.js";
+import { buildJurisdictionContext, getStateData } from "./_lib/states.js";
 
 const DEFAULT_CONFIDENCE_THRESHOLD = Number(process.env.AI_CONFIDENCE_THRESHOLD || 0.72);
 
@@ -90,16 +91,19 @@ async function processFreeIntake(job) {
     throw new Error("Invalid free_intake_analysis payload.");
   }
 
+  const stateData = getStateData(lead.state);
+  const jurisdictionContext = buildJurisdictionContext(lead.state);
+
   const generated = await withRetries(
     () =>
       callOpenAIJson({
         systemPrompt:
-          "You are a California small claims preparation assistant. Provide educational information and document support only, never legal advice.",
+          `You are a small claims court preparation assistant for ${stateData.name}. Provide educational information and document support only, never legal advice. Always reference the correct state court, forms, and procedures for ${stateData.name}.`,
         userPrompt: [
           `Client: ${lead.name}`,
           `Email: ${lead.email}`,
           `Phone: ${lead.phone || "not provided"}`,
-          `Jurisdiction: Kern County, California`,
+          jurisdictionContext,
           `Case description: ${lead.description}`,
         ].join("\n"),
         schema: {
@@ -162,11 +166,14 @@ async function processPaidPacket(job) {
     throw new Error("Invalid paid_packet_delivery payload.");
   }
 
+  const stateData = getStateData(lead.state);
+  const jurisdictionContext = buildJurisdictionContext(lead.state);
+
   const packet = await withRetries(
     () =>
       callOpenAIJson({
         systemPrompt:
-          "You are a California small claims document-prep assistant. Output educational template language, not legal advice.",
+          `You are a small claims court document-prep assistant for ${stateData.name}. Output educational template language only, not legal advice. Reference the correct ${stateData.name} court forms, procedures, and statutes.`,
         userPrompt: [
           tier === "court"
             ? "Generate a practical court packet for a self-represented small-claims claimant."
@@ -174,7 +181,7 @@ async function processPaidPacket(job) {
           `Client name: ${lead.name}`,
           `Client email: ${buyerEmail}`,
           `Client phone: ${lead.phone || "not provided"}`,
-          `Jurisdiction: Kern County, California`,
+          jurisdictionContext,
           `Case details: ${lead.description}`,
         ].join("\n"),
         schema: {
@@ -262,6 +269,7 @@ async function runSlaAlerts() {
 }
 
 function buildFreeEmailHtml(payload, generated) {
+  const stateData = getStateData(payload.state);
   const planItems = generated.actionPlan
     .map((step) => `<li style="margin:0 0 8px 0;">${escapeHtml(step)}</li>`)
     .join("");
@@ -272,7 +280,7 @@ function buildFreeEmailHtml(payload, generated) {
   return `
     <div style="font-family:Inter,Segoe UI,Arial,sans-serif;line-height:1.55;color:#111;">
       <h2 style="margin:0 0 12px 0;">Your SmallClaimsPro action plan</h2>
-      <p style="margin:0 0 12px 0;">Hi ${escapeHtml(payload.name)}, here is your personalized plan. This is educational support, not legal advice.</p>
+      <p style="margin:0 0 12px 0;">Hi ${escapeHtml(payload.name)}, here is your personalized plan for ${escapeHtml(stateData.name)} small claims court. This is educational support only — not legal advice. AI-assisted document preparation.</p>
       <h3 style="margin:16px 0 8px 0;">Case assessment</h3>
       <p style="margin:0 0 12px 0;">${escapeHtml(generated.assessment)}</p>
       <h3 style="margin:16px 0 8px 0;">Action plan</h3>
@@ -283,14 +291,17 @@ function buildFreeEmailHtml(payload, generated) {
       )}</pre>
       <h3 style="margin:16px 0 8px 0;">Evidence priorities</h3>
       <ul style="margin:0 0 12px 20px;padding:0;">${evidenceItems}</ul>
-      <h3 style="margin:16px 0 8px 0;">Kern County filing reminder</h3>
-      <p style="margin:0 0 16px 0;">${escapeHtml(generated.filingReminder)}</p>
+      <h3 style="margin:16px 0 8px 0;">${escapeHtml(stateData.name)} filing reminder</h3>
+      <p style="margin:0 0 8px 0;">${escapeHtml(generated.filingReminder)}</p>
+      <p style="margin:0 0 16px 0;font-size:13px;color:#555;">Court: ${escapeHtml(stateData.courtName)} · Claim limit: ${escapeHtml(stateData.claimLimit)} · <a href="${escapeHtml(stateData.courtUrl)}">Court website</a></p>
       <p style="margin:0;"><a href="https://square.link/u/Y6Wb0XPx">Court Packet ($29)</a> | <a href="https://square.link/u/vSbyYSIn">Done-For-You Prep ($99)</a></p>
+      <p style="margin-top:16px;font-size:12px;color:#888;">${escapeHtml(stateData.disclaimer)}</p>
     </div>
   `;
 }
 
 function buildPaidEmailHtml(lead, packet, tier) {
+  const stateData = getStateData(lead.state);
   const checklist = packet.filingChecklist
     .map((item) => `<li style="margin:0 0 8px 0;">${escapeHtml(item)}</li>`)
     .join("");
@@ -298,7 +309,7 @@ function buildPaidEmailHtml(lead, packet, tier) {
   return `
     <div style="font-family:Inter,Segoe UI,Arial,sans-serif;line-height:1.55;color:#111;">
       <h2 style="margin:0 0 12px 0;">Your ${tier === "court" ? "Court Packet" : "Done-For-You Prep"} is ready</h2>
-      <p style="margin:0 0 12px 0;">Hi ${escapeHtml(lead.name)}, thanks for your order. This is educational document support and not legal advice.</p>
+      <p style="margin:0 0 12px 0;">Hi ${escapeHtml(lead.name)}, thanks for your order. This is AI-assisted educational document support for ${escapeHtml(stateData.name)} small claims court — not legal advice.</p>
       <h3 style="margin:16px 0 8px 0;">Case summary</h3>
       <p style="margin:0 0 12px 0;">${escapeHtml(packet.summary)}</p>
       <h3 style="margin:16px 0 8px 0;">Demand letter draft</h3>
@@ -311,7 +322,9 @@ function buildPaidEmailHtml(lead, packet, tier) {
       <pre style="white-space:pre-wrap;background:#f6f8fa;padding:12px;border-radius:8px;border:1px solid #ddd;">${escapeHtml(
         packet.hearingScript
       )}</pre>
-      <p style="margin-top:16px;">Need help refining this packet? Reply to this email and we will assist.</p>
+      <p style="margin-top:16px;font-size:13px;color:#555;">Court: ${escapeHtml(stateData.courtName)} · Forms: ${escapeHtml(stateData.forms)} · <a href="${escapeHtml(stateData.courtUrl)}">Court website</a></p>
+      <p style="margin-top:12px;">Need help refining this packet? Reply to this email and we will assist.</p>
+      <p style="margin-top:16px;font-size:12px;color:#888;">${escapeHtml(stateData.disclaimer)}</p>
     </div>
   `;
 }

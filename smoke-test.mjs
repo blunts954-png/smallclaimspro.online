@@ -18,6 +18,7 @@ async function run() {
     consent: true,
     source: "smoke-test",
     selectedTier: "free",
+    state: "CA",
     createdAt: new Date().toISOString(),
   };
 

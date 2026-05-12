@@ -63,14 +63,23 @@ export default async (request) => {
     }
 
     const latest = await getLatestSubmissionByEmail(buyerEmail);
-    const lead = latest || {
-      name: payment?.customer_details?.given_name || "Customer",
-      email: buyerEmail,
-      phone: payment?.customer_details?.phone_number || "",
-      description:
-        "No matching intake submission was found. Ask customer to reply with case summary.",
-      source: "square-webhook-only",
-    };
+    if (latest && !latest.state) {
+      await notifyOps("Paid order: intake submission missing state field", {
+        eventId,
+        buyerEmail,
+      });
+    }
+    const lead = latest
+      ? { ...latest, state: latest.state || "CA" }
+      : {
+          name: payment?.customer_details?.given_name || "Customer",
+          email: buyerEmail,
+          phone: payment?.customer_details?.phone_number || "",
+          description:
+            "No matching intake submission was found. Ask customer to reply with case summary.",
+          source: "square-webhook-only",
+          state: "CA",
+        };
 
     const queued = await enqueueJob(
       "paid_packet_delivery",
